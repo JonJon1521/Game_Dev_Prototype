@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class playerController : MonoBehaviour, IDamage
 {
-  [SerializeField] playerController controller;
+  [SerializeField] CharacterController controller;
   [SerializeField] LayerMask ignoreLayer;
 
   [SerializeField] int HP;
@@ -44,13 +44,13 @@ public class playerController : MonoBehaviour, IDamage
     sprint();
   }
 
-  public void spawnPlayer()
+  /*public void spawnPlayer()
   {
-    controller.transform.position = gamemanager.instance.playerSpawnPos.transform.position;
+    controller.transform.position = gameManager.instance.playerSpawnPos.transform.position;
     Physics.SyncTransforms();
     HP = HPOrig;
     updatePlayerUI();
-  }
+  }*/
 
   void movement()
   {
@@ -101,7 +101,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         shootTimer = 0;
         gunList[gunListPos].ammoCur--;
-        aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
+        //aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
@@ -131,20 +131,20 @@ public class playerController : MonoBehaviour, IDamage
     StartCoroutine(flashScreen());
     if (HP <= 0)
       {
-        gamemanager.instance.youLose();
+        gameManager.instance.youLose();
       }
   }
 
   IEnumerator flashScreen()
   {
-    gamemanager.instance.playerDamageFlash.SetActive(true);
+    gameManager.instance.playerDamageFlash.SetActive(true);
     yield return new WaitForSeconds(0.1f);
-    gamemanager.instance.playerDamageFlash.SetActive(false);
+    gameManager.instance.playerDamageFlash.SetActive(false);
   }
 
   public void updatePlayerUI()
   {
-    gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+    gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
   }
 
   public void getGunStats(gunStats gun)
