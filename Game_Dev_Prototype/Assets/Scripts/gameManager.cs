@@ -34,10 +34,7 @@ public class gameManager : MonoBehaviour
     playerScript = player.GetComponent<playerController>();
     //playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
   }
-        player = GameObject.FindWithTag("Player");
-        playerScript = player.GetComponent<playerController>();
-        //playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
-    }
+       
 
     // Update is called once per frame
     void Update()
