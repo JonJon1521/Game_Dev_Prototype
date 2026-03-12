@@ -13,7 +13,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [Header("~~~~~ States ~~~~~")]
 
-    [Range(1, 30)] [SerializeField] int HP;
+    [Range(1, 30)][SerializeField] int HP;
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -96,7 +96,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void checkRoam()
     {
-        if(agent.remainingDistance < 0.1f && roamTimer >= roamPauseTime)
+        if (agent.remainingDistance < 0.1f && roamTimer >= roamPauseTime)
         {
             roam();
         }
@@ -144,7 +144,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
                 shootTimer += Time.deltaTime;
 
-                if(shootTimer >= shootRate)
+                if (shootTimer >= shootRate)
                 {
                     shoot();
                 }
@@ -176,7 +176,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             playerInRange = true;
         }
@@ -184,7 +184,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             playerInRange = false;
 
@@ -205,7 +205,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
         agent.SetDestination(gameManager.instance.player.transform.position);
 
-        if(HP <= 0)
+        if (HP <= 0)
         {
             // Enemy is dead
 
