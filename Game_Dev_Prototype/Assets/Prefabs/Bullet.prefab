@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4677377172591258091}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -81.53, y: 1.52, z: 77.251}
+  m_LocalPosition: {x: 9.2, y: 1.52, z: 77.251}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -51,10 +51,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::damage
   type: 0
   rigid: {fileID: 5864967227630654849}
-  damageAmount: 0
+  damageAmount: 2
   rateOfDamage: 0
-  speed: 0
-  destroyTime: 0
+  speed: 4
+  destroyTime: 1
   hit: {fileID: 0}
 --- !u!96 &5865065353142497821
 TrailRenderer:
