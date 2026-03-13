@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections;
 
 
 
@@ -18,6 +19,9 @@ public class playerController : MonoBehaviour, IDamage
     [Range(1, 4)][SerializeField] int jumptimesMax;
     [Range(15, 50)][SerializeField] int gravity;
 
+    [Header("Dodge Settings")]
+    [SerializeField] float dodgeDistance = 3f;
+    [SerializeField] float dodgeSpeed = 8f;
 
     [Header("Guns")]
     [SerializeField] int shootDamage;
@@ -32,6 +36,7 @@ public class playerController : MonoBehaviour, IDamage
     Vector3 moveDir;
     Vector3 playerVel;
 
+    bool isDodging = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -46,6 +51,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         movement();
         sprint();
+        HandleDodgeInput();
     }
 
     void movement()
@@ -107,6 +113,51 @@ public class playerController : MonoBehaviour, IDamage
                 dmg.takeDamage(shootDamage);
             }
         }
+    }
+
+    void HandleDodgeInput()
+    {
+        if (isDodging) return;
+
+        Camera cam = Camera.main;
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            StartCoroutine(DodgeRoutine(transform.right)); // move player
+            if (cam != null)
+            {
+                cam.GetComponent<cameraController>().DodgeTilt(-40f, 0.2f); // tilt camera left
+                cam.GetComponent<cameraController>().shack(0.2f, 0.1f);      // optional shake
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            StartCoroutine(DodgeRoutine(-transform.right)); // move player
+            if (cam != null)
+            {
+                cam.GetComponent<cameraController>().DodgeTilt(40f, 0.2f);  // tilt camera right
+                cam.GetComponent<cameraController>().shack(0.2f, 0.1f);    // optional shake
+            }
+        }
+    }
+
+    private IEnumerator DodgeRoutine(Vector3 dir)
+    {
+        isDodging = true;
+
+        Vector3 startPos = transform.position;
+        Vector3 targetPos = startPos + dir * dodgeDistance;
+
+        float t = 0f;
+        while (t < 1f)
+        {
+            transform.position = Vector3.Lerp(startPos, targetPos, t);
+            t += Time.deltaTime * dodgeSpeed;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.05f);
+        isDodging = false;
     }
 
     public void TakeDamage(int damage)
