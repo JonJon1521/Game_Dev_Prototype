@@ -61,9 +61,9 @@ MonoBehaviour:
   gravity: 25
   gunList: []
   gunModel: {fileID: 0}
-  shootDamage: 0
-  shootDist: 0
-  shootRate: 0
+  shootDamage: 1
+  shootDist: 5
+  shootRate: 0.5
 --- !u!143 &-6308406431859260662
 CharacterController:
   m_ObjectHideFlags: 0
