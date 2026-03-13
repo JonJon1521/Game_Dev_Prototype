@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 7876080502686056955}
   - component: {fileID: 822574410517024664}
   - component: {fileID: 8273661134302695695}
+  - component: {fileID: 928830056311584579}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Untagged
@@ -165,7 +166,7 @@ MonoBehaviour:
   modle: {fileID: 7876080502686056955}
   agent: {fileID: 8273661134302695695}
   HP: 6
-  bullet: {fileID: 8366531972236322083, guid: 6f4fd46d662f5ac4c9e471018b4600a0, type: 3}
+  bullet: {fileID: 4677377172591258091, guid: 22ecfb39346b17c4e8f4ba2cf88a4b76, type: 3}
   shootRate: 3
   shootPos: {fileID: 4428957615239185803}
   gunPivot: {fileID: 861554704955884329}
@@ -276,6 +277,27 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &928830056311584579
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4067675759529583650}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 15
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5375780655779973578
 GameObject:
   m_ObjectHideFlags: 0
