@@ -17,6 +17,8 @@ public class cameraController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        player = transform.parent;
         Cursor.visible = false;
 
         Cursor.lockState = CursorLockMode.Locked;

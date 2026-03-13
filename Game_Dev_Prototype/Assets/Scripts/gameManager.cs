@@ -33,13 +33,13 @@ public class gameManager : MonoBehaviour
     player = GameObject.FindWithTag("Player");
     playerScript = player.GetComponent<playerController>();
     //playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
-  }
+    }
        
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetKeyDown(KeyCode.Escape))
             if (menuActive == null)
             {
                 statePause();
