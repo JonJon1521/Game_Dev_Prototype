@@ -1,2 +1,20 @@
 fileFormatVersion: 2
 guid: 340a96e925ddf4b4295be9764333a52f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - menuActive: {instanceID: 0}
+  - menuPause: {fileID: 696486512573930149, guid: 3223b9d79fe1a4742a710541ff7490db, type: 3}
+  - menuWin: {instanceID: 0}
+  - menuLose: {instanceID: 0}
+  - gameGoalCountText: {instanceID: 0}
+  - playerHPBar: {instanceID: 0}
+  - playerDamageFlash: {instanceID: 0}
+  - player: {fileID: 638851036564823962, guid: e869e19945c1e174180658437a894163, type: 3}
+  - playerScript: {fileID: 4620335139280802719, guid: e869e19945c1e174180658437a894163, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

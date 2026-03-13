@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b0c60d0bcad1e40933344569c6262e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerController
-  controller: {fileID: 0}
+  controller: {fileID: -6308406431859260662}
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 0
