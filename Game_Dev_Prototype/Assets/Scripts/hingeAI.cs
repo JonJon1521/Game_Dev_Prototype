@@ -21,7 +21,7 @@ public class hingeAI : MonoBehaviour
     void Start()
     {
         colorOrig = model.material.color;
-        gameManager.instance.updateGameGoal(1);
+        //gameManager.instance.updateGameGoal(1);
     }
 
     // Update is called once per frame

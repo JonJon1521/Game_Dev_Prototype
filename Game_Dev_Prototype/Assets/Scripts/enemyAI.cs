@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
@@ -39,6 +40,9 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [SerializeField] int roamDistance;
 
+    //[Header("Manual Enemy")]
+    //[SerializeField] private bool isManualEnemy = true;
+
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Color colorOrig;
@@ -56,6 +60,7 @@ public class enemyAI : MonoBehaviour, IDamage
     //~~~~~~~~~~~~~~~~Bools~~~~~~~~~~~~~~~~~~~~
 
     bool playerInRange;
+    //private bool counted = false;
 
     //~~~~~~~~~~~~~~~Vectors~~~~~~~~~~~~~~~~~~~~~
 
@@ -64,16 +69,20 @@ public class enemyAI : MonoBehaviour, IDamage
     Vector3 startingPos;
 
 
+   
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         colorOrig = model.material.color;
 
-        gameManager.instance.updateGameGoal(1);
+       // gameManager.instance.updateGameGoal(1);
 
         startingPos = transform.position;
 
         stoppingDistOrig = agent.stoppingDistance;
+
+      
     }
 
     // Update is called once per frame
