@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
-    [SerializeField] Renderer modle;
+    [SerializeField] Renderer model;
 
     [SerializeField] NavMeshAgent agent;
 
@@ -67,7 +67,7 @@ public class enemyAI : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        colorOrig = modle.material.color;
+        colorOrig = model.material.color;
 
         gameManager.instance.updateGameGoal(1);
 
@@ -203,7 +203,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         HP -= amount;
 
-        agent.SetDestination(gameManager.instance.player.transform.position);
+        //agent.SetDestination(gameManager.instance.player.transform.position);
 
         if (HP <= 0)
         {
@@ -221,10 +221,10 @@ public class enemyAI : MonoBehaviour, IDamage
 
     IEnumerator flashRed()
     {
-        modle.material.color = Color.red;
+        model.material.color = Color.red;
 
         yield return new WaitForSeconds(0.1f);
 
-        modle.material.color = colorOrig;
+        model.material.color = colorOrig;
     }
 }

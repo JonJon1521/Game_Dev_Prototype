@@ -1,10 +1,11 @@
 ﻿using System.Collections;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class damage : MonoBehaviour
 {
 
-    enum damagetype { bullet, DOT }
+    enum damagetype { bullet, DOT, stationary }
     [SerializeField] damagetype type;
     [SerializeField] Rigidbody rigid;
 
@@ -44,7 +45,17 @@ public class damage : MonoBehaviour
             }
             Destroy(gameObject);
         }
+
+        if(dmg != null && type != damagetype.stationary)
+        {
+            if (other.CompareTag("Player"))
+            {
+                dmg.takeDamage(damageAmount);
+            }
+        }
+
     }
+
 
     private void OnTriggerStay(Collider other)
     {

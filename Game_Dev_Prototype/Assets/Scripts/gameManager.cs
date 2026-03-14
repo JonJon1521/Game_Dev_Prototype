@@ -21,18 +21,17 @@ public class gameManager : MonoBehaviour
     public playerController playerScript;
     public bool isPaused;
 
-    float timeScaleOrgi;
+    private float timeScaleOrig;
 
-    int gameGoalCount;
+    private int gameGoalCount;
 
     void Awake()
     {
         instance = this;
-        timeScaleOrgi = Time.timeScale;
+        timeScaleOrig = Time.timeScale;
 
     player = GameObject.FindWithTag("Player");
     playerScript = player.GetComponent<playerController>();
-    //playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
     }
        
 
@@ -40,6 +39,7 @@ public class gameManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
             if (menuActive == null)
             {
                 statePause();
@@ -50,6 +50,7 @@ public class gameManager : MonoBehaviour
             {
                 stateUnpause();
             }
+        }
     }
 
     public void statePause()
@@ -63,7 +64,7 @@ public class gameManager : MonoBehaviour
     public void stateUnpause()
     {
         isPaused = false;
-        Time.timeScale = timeScaleOrgi;
+        Time.timeScale = timeScaleOrig;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);

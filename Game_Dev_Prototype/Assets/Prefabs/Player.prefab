@@ -57,10 +57,8 @@ MonoBehaviour:
   speed: 4
   sprintMod: 3
   jumpSpeed: 12
-  jumpMax: 1
+  jumptimesMax: 1
   gravity: 25
-  gunList: []
-  gunModel: {fileID: 0}
   shootDamage: 1
   shootDist: 5
   shootRate: 0.5
