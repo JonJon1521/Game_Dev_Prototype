@@ -12,7 +12,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] LayerMask ignoreLayer;
 
     [Header("Stats")]
-    [Range(1, 10)][SerializeField] int HP;
+    [Range(1, 1000)][SerializeField] int HP;
     [Range(1, 10)][SerializeField] int speed;
     [Range(2, 6)][SerializeField] int sprintMod;
     [Range(5, 25)][SerializeField] int jumpSpeed;

@@ -41,7 +41,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] int roamDistance;
 
     //[Header("Manual Enemy")]
-    //[SerializeField] private bool isManualEnemy = true;
+    [SerializeField] private bool isManualEnemy = true;
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -60,7 +60,7 @@ public class enemyAI : MonoBehaviour, IDamage
     //~~~~~~~~~~~~~~~~Bools~~~~~~~~~~~~~~~~~~~~
 
     bool playerInRange;
-    //private bool counted = false;
+    public bool counted = false;
 
     //~~~~~~~~~~~~~~~Vectors~~~~~~~~~~~~~~~~~~~~~
 
@@ -82,7 +82,11 @@ public class enemyAI : MonoBehaviour, IDamage
 
         stoppingDistOrig = agent.stoppingDistance;
 
-      
+        if (isManualEnemy && !counted)
+        {
+            gameManager.instance.updateGameGoal(1);
+            counted = true;
+        }
     }
 
     // Update is called once per frame
@@ -217,23 +221,33 @@ public class enemyAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             // Enemy is dead
+            StopAllCoroutines();
 
-            gameManager.instance.updateGameGoal(-1);
+            if (counted)
+            {
+                gameManager.instance.updateGameGoal(-1);
+                counted = false;
+            }
+               
 
             Destroy(gameObject);
         }
         else
         {
-            StartCoroutine(flashRed());
+            if (model != null)
+                StartCoroutine(flashRed());
         }
     }
 
     IEnumerator flashRed()
     {
+        if (model == null) yield break;
+
         model.material.color = Color.red;
 
         yield return new WaitForSeconds(0.1f);
 
-        model.material.color = colorOrig;
+        if (model != null)
+            model.material.color = colorOrig;
     }
 }

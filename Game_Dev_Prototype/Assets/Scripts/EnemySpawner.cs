@@ -11,29 +11,40 @@ public class EnemySpawner : MonoBehaviour
     [Header("Spawn Settings")]
     public float spawnInterval = 5f;
     public bool spawnRandom = true;
-    public float spawnOffset = 1f;         
+    public float spawnOffset = 1f;
+
+    [Header("Manual Enemy")]
+    public enemyAI manualEnemy;
 
     [Header("Optional: Player Proximity")]
     public Transform player;                
     public float spawnDistance = 30f;       
-    public bool checkPlayerDistance = false; 
+    public bool checkPlayerDistance = false;
+
+    [Header("Initial Maze Spawns")]
+    public int initialEnemiesPerPoint = 3;
 
     private float spawnTimer;
     private int nextIndex = 0;
 
     void Start()
     {
-        //SpawnEnemy();
-
-        enemyAI[] manualEnemies = GameObject.FindObjectsOfType<enemyAI>();
-        foreach (enemyAI e in manualEnemies)
+        // Count manual enemy
+        if (manualEnemy != null && !manualEnemy.counted)
         {
             gameManager.instance.updateGameGoal(1);
+            manualEnemy.counted = true;
         }
 
-        if (GameObject.FindObjectsOfType<enemyAI>().Length == 0)
+
+        // Spawn initial maze enemies
+        foreach (EnemySpawnPoint sp in spawnPoints)
         {
-            SpawnEnemy();
+            int spawnCount = Mathf.Min(initialEnemiesPerPoint, sp.maxEnemies);
+            for (int i = 0; i < spawnCount; i++)
+            {
+                SpawnEnemyAt(sp);
+            }
         }
     }
 
@@ -48,56 +59,68 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-   void SpawnEnemy()
+    void SpawnEnemy()
     {
         if (spawnPoints.Length == 0) return;
 
-        EnemySpawnPoint spawnPointScript;
-        Transform spawnPointTransform;
+        EnemySpawnPoint sp;
+        Transform spTransform;
 
         if (spawnRandom)
         {
             int tries = 0;
             do
             {
-                spawnPointScript = spawnPoints[Random.Range(0, spawnPoints.Length)];
+                sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
                 tries++;
-            } while (spawnPointScript.spawnedEnemies >= spawnPointScript.maxEnemies && tries < 10);
+            } while ((sp.spawnedEnemies >= sp.maxEnemies || !PlayerIsNear(sp)) && tries < 10);
 
-            // If all spawn points reached max, do nothing
-            if (spawnPointScript.spawnedEnemies >= spawnPointScript.maxEnemies) return;
+            if (sp.spawnedEnemies >= sp.maxEnemies || !PlayerIsNear(sp))
+                return;
 
-            spawnPointTransform = spawnPointScript.transform;
+            spTransform = sp.transform;
         }
         else
         {
-            spawnPointScript = spawnPoints[nextIndex];
-            spawnPointTransform = spawnPointScript.transform;
+            sp = spawnPoints[nextIndex];
+            spTransform = sp.transform;
             nextIndex = (nextIndex + 1) % spawnPoints.Length;
 
-            if (spawnPointScript.spawnedEnemies >= spawnPointScript.maxEnemies) return;
+            if (sp.spawnedEnemies >= sp.maxEnemies || !PlayerIsNear(sp))
+                return;
         }
 
-        // Optional: check player distance
-        if (checkPlayerDistance && Vector3.Distance(player.position, spawnPointTransform.position) > spawnDistance)
-            return;
+        SpawnEnemyAt(sp);
+    }
 
-        // Add spawn offset
-        Vector3 spawnPos = spawnPointTransform.position + new Vector3(
+    bool PlayerIsNear(EnemySpawnPoint sp)
+    {
+        if (!checkPlayerDistance) return true;   // ignore distance if disabled
+        if (player == null) return true;         // fallback
+        return Vector3.Distance(player.position, sp.transform.position) <= spawnDistance;
+    }
+
+    void SpawnEnemyAt(EnemySpawnPoint sp)
+    {
+        Vector3 spawnPos = sp.transform.position + new Vector3(
             Random.Range(-spawnOffset, spawnOffset),
             0f,
             Random.Range(-spawnOffset, spawnOffset)
         );
 
-        // Spawn enemy
-        GameObject enemy = Instantiate(enemyPrefab, spawnPos, spawnPointTransform.rotation);
+        GameObject enemy = Instantiate(enemyPrefab, spawnPos, sp.transform.rotation);
         enemy.transform.parent = transform;
 
-        // Update game manager
-        gameManager.instance.updateGameGoal(1);
+        // Increment game manager
+        enemyAI ai = enemy.GetComponent<enemyAI>();
+        if (ai != null && !ai.counted)
+        {
+            gameManager.instance.updateGameGoal(1);
+            ai.counted = true; // mark this instance as counted
+        }
 
         // Increment spawn point counter
-        spawnPointScript.spawnedEnemies++;
+        sp.spawnedEnemies++;
     }
 
 }
