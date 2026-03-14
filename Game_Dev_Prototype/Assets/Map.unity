@@ -45337,11 +45337,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4620335139280802719, guid: e869e19945c1e174180658437a894163, type: 3}
       propertyPath: HP
-      value: 1000
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4620335139280802719, guid: e869e19945c1e174180658437a894163, type: 3}
       propertyPath: shootDist
-      value: 15
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 4620335139280802719, guid: e869e19945c1e174180658437a894163, type: 3}
       propertyPath: shootRate
@@ -45353,7 +45353,7 @@ PrefabInstance:
       objectReference: {fileID: 2107124196}
     - target: {fileID: 4620335139280802719, guid: e869e19945c1e174180658437a894163, type: 3}
       propertyPath: shootDamage
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4620335139280802719, guid: e869e19945c1e174180658437a894163, type: 3}
       propertyPath: jumptimesMax
@@ -45727,6 +45727,10 @@ PrefabInstance:
     - target: {fileID: 2156066964276650025, guid: d51c5f51228cd1b43a3beaac72cd5c02, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4624852593812391296, guid: d51c5f51228cd1b43a3beaac72cd5c02, type: 3}
+      propertyPath: shootRate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5599395373440682822, guid: d51c5f51228cd1b43a3beaac72cd5c02, type: 3}
       propertyPath: m_Name

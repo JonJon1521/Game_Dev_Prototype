@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using UnityEditorInternal;
+//using UnityEditorInternal;
 using UnityEngine;
 
 public class damage : MonoBehaviour
