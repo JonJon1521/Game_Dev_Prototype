@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2309650573245206868}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -23.83, y: 2.5, z: 7.25}
   m_LocalScale: {x: 0.049999997, y: 5, z: 0.1}
   m_ConstrainProportionsScale: 0
@@ -54,6 +54,7 @@ MonoBehaviour:
   trapDoor: {fileID: 3900337891156595266}
   obstacle: {fileID: 481725158186504885}
   slamRate: 2
+  colorOrig: {r: 0, g: 0, b: 0, a: 0}
 --- !u!54 &623369735792900543
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -190,6 +191,7 @@ GameObject:
   - component: {fileID: 3066875871029418768}
   - component: {fileID: 3900337891156595266}
   - component: {fileID: 9034415700495352273}
+  - component: {fileID: 8290017898349869663}
   m_Layer: 0
   m_Name: Trap Door
   m_TagString: Untagged
@@ -206,7 +208,7 @@ Transform:
   m_GameObject: {fileID: 8728443119425170379}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -50.000347, y: 0, z: 5}
+  m_LocalPosition: {x: -50.000347, y: 0, z: -21.4}
   m_LocalScale: {x: 100, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -375,3 +377,19 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!208 &8290017898349869663
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8728443119425170379}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

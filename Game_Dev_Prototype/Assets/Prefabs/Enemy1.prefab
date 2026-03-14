@@ -142,7 +142,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4067675759529583650}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.999873, z: -0, w: -0.015943713}
+  m_LocalRotation: {x: 0, y: 0.9998729, z: -0, w: -0.015942838}
   m_LocalPosition: {x: -1.55, y: 1.43, z: -4.74}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52149638e57cc847a41f675fc653d98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemyAI
-  modle: {fileID: 7876080502686056955}
+  model: {fileID: 7876080502686056955}
   agent: {fileID: 8273661134302695695}
   HP: 6
   bullet: {fileID: 4677377172591258091, guid: 22ecfb39346b17c4e8f4ba2cf88a4b76, type: 3}
@@ -175,6 +175,8 @@ MonoBehaviour:
   gunRotateSpeed: 5
   roamPauseTime: 3
   roamDistance: 20
+  isManualEnemy: 1
+  counted: 0
 --- !u!33 &2880211683430399249
 MeshFilter:
   m_ObjectHideFlags: 0
