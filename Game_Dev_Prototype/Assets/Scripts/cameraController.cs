@@ -12,8 +12,13 @@ public class cameraController : MonoBehaviour
     [SerializeField] Transform player;
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    /* [SerializeField] float dodgeAngle = 40f;
+     [SerializeField] float dodgeSpeed = 8f;
+     [SerializeField] float dodgeDistance = 3f;*/
 
     float camRotX;
+    float dodgeTilt;
+    bool isDodging;
 
     Vector3 origLocalPos;
 
@@ -33,42 +38,76 @@ public class cameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * sens * Time.deltaTime;
+        HandleMouseLook();
+    }
 
+    void HandleMouseLook()
+    {
+        float mouseX = Input.GetAxisRaw("Mouse X") * sens * Time.deltaTime;
         float mouseY = Input.GetAxisRaw("Mouse Y") * sens * Time.deltaTime;
 
-        if(invertY)
-        {
+        if (invertY)
             camRotX += mouseY;
-        }
         else
-        {
             camRotX -= mouseY;
-        }
 
         camRotX = Mathf.Clamp(camRotX, lockVertMin, lockVertMax);
 
-        transform.localRotation = Quaternion.Euler(camRotX, 0, 0);
+        transform.localRotation = Quaternion.Euler(camRotX, 0, dodgeTilt);
 
-        player.transform.Rotate(Vector3.up * mouseX);
+        player.Rotate(Vector3.up * mouseX);
     }
+
+    public void DodgeTilt(float angle, float duration = 0.2f)
+    {
+        if (!isDodging)
+            StartCoroutine(DodgeTiltRoutine(angle, duration));
+    }
+
+    private IEnumerator DodgeTiltRoutine(float angle, float duration)
+    {
+        isDodging = true;
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            dodgeTilt = Mathf.Lerp(0, angle, t);
+            t += Time.deltaTime / duration;
+            yield return null;
+        }
+
+        t = 0f;
+
+        while (t < 1f)
+        {
+            dodgeTilt = Mathf.Lerp(angle, 0, t);
+            t += Time.deltaTime / duration;
+            yield return null;
+        }
+
+        dodgeTilt = 0;
+        isDodging = false;
+    }
+
+
+
 
     public void shack(float dur, float mag) // dur = duration, mag = magnitud
     {
         StartCoroutine(ProcessShack(dur, mag)); // start the Coroutine
     }
 
-    private IEnumerator ProcessShack(float dur,float mag)
+    private IEnumerator ProcessShack(float dur, float mag)
     {
         float elapsed = 0.0f; // track how much time has passed since the shack started
 
         // keep shacking till the elapsed time meets duration time
 
-        while(elapsed < dur)
+        while (elapsed < dur)
         {
             float x = Random.Range(-1f, -1f) * mag; // pick a random x offset for the magnitud ( the intensaty of the hit)
 
-            float y = Random.Range(-1f, -1f) * mag; // paick a random y offet for magnitud
+            float y = Random.Range(-1f, -1f) * mag; // pick a random y offet for magnitud
 
             transform.localPosition = new Vector3(origLocalPos.x + x, origLocalPos.y + y, origLocalPos.z); // move the camera to a new random spot keeping the z distance
 

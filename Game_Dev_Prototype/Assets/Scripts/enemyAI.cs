@@ -2,10 +2,11 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+//using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
-    [SerializeField] Renderer modle;
+    [SerializeField] Renderer model;
 
     [SerializeField] NavMeshAgent agent;
 
@@ -39,6 +40,9 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [SerializeField] int roamDistance;
 
+    //[Header("Manual Enemy")]
+    [SerializeField] private bool isManualEnemy = true;
+
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Color colorOrig;
@@ -56,6 +60,7 @@ public class enemyAI : MonoBehaviour, IDamage
     //~~~~~~~~~~~~~~~~Bools~~~~~~~~~~~~~~~~~~~~
 
     bool playerInRange;
+    public bool counted = false;
 
     //~~~~~~~~~~~~~~~Vectors~~~~~~~~~~~~~~~~~~~~~
 
@@ -64,16 +69,24 @@ public class enemyAI : MonoBehaviour, IDamage
     Vector3 startingPos;
 
 
+   
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        colorOrig = modle.material.color;
+        colorOrig = model.material.color;
 
-        gameManager.instance.updateGameGoal(1);
+       // gameManager.instance.updateGameGoal(1);
 
         startingPos = transform.position;
 
         stoppingDistOrig = agent.stoppingDistance;
+
+        if (isManualEnemy && !counted)
+        {
+            gameManager.instance.updateGameGoal(1);
+            counted = true;
+        }
     }
 
     // Update is called once per frame
@@ -203,28 +216,38 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         HP -= amount;
 
-        agent.SetDestination(gameManager.instance.player.transform.position);
+        //agent.SetDestination(gameManager.instance.player.transform.position);
 
         if (HP <= 0)
         {
             // Enemy is dead
+            StopAllCoroutines();
 
-            gameManager.instance.updateGameGoal(-1);
+            if (counted)
+            {
+                gameManager.instance.updateGameGoal(-1);
+                counted = false;
+            }
+               
 
             Destroy(gameObject);
         }
         else
         {
-            StartCoroutine(flashRed());
+            if (model != null)
+                StartCoroutine(flashRed());
         }
     }
 
     IEnumerator flashRed()
     {
-        modle.material.color = Color.red;
+        if (model == null) yield break;
+
+        model.material.color = Color.red;
 
         yield return new WaitForSeconds(0.1f);
 
-        modle.material.color = colorOrig;
+        if (model != null)
+            model.material.color = colorOrig;
     }
 }

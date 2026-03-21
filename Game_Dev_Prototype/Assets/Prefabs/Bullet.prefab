@@ -53,8 +53,8 @@ MonoBehaviour:
   rigid: {fileID: 5864967227630654849}
   damageAmount: 2
   rateOfDamage: 0
-  speed: 4
-  destroyTime: 1
+  speed: 7
+  destroyTime: 3
   hit: {fileID: 0}
 --- !u!96 &5865065353142497821
 TrailRenderer:
