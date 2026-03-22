@@ -186,4 +186,15 @@ public class playerController : MonoBehaviour, IDamage
             gameManager.instance.youLose();
         }
     }
+
+    public void applySlowSpeed(int amount)
+    {
+        speed = speed / amount; // takes our currents speed at what its set to and subtacts the amount 
+    }
+
+    public void removeSlowSpeed(int amount)
+    {
+        speed = speed * amount; // takes our current (slow) speed and adds the 'amount' back to it
+    }
+
 }

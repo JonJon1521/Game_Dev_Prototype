@@ -52,15 +52,17 @@ MonoBehaviour:
   controller: {fileID: -6308406431859260662}
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 0
-  HP: 10
+    m_Bits: 8
+  HP: 90
   speed: 4
   sprintMod: 3
   jumpSpeed: 12
   jumptimesMax: 1
   gravity: 25
-  shootDamage: 1
-  shootDist: 5
+  dodgeDistance: 3
+  dodgeSpeed: 8
+  shootDamage: 2
+  shootDist: 35
   shootRate: 0.5
 --- !u!143 &-6308406431859260662
 CharacterController:
