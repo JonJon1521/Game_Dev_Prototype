@@ -75,7 +75,10 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     IEnumerator playStep()
     {
         isPlayingStep = true;
-        aud.PlayOneShot(audStep[Random.Range(0, audStep.Length)], audStepVol);
+        if (audStep.Length > 0)
+        {
+            aud.PlayOneShot(audStep[Random.Range(0, audStep.Length)], audStepVol);
+        }
 
         if (isSprinting)
         {
