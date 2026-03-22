@@ -189,7 +189,7 @@ public class playerController : MonoBehaviour, IDamage
 
     public void applySlowSpeed(int amount)
     {
-        speed = speed / amount; // takes our currents speed at what its set to and subtacts the amount 
+        speed = speed / amount; // takes our currents speed at what its set to and divides the amount 
     }
 
     public void removeSlowSpeed(int amount)
