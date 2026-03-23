@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc6c6c78554c1d41ace7f07b597d40c, type: 3}
   m_Name: Assault Rifle
   m_EditorClassIdentifier: Assembly-CSharp::gunStats
-  gunModel: {fileID: 816593990133550279, guid: b85abf261bfaeef4fa4a0b85ca5544d3, type: 3}
+  gunModel: {fileID: 5494625650325380441, guid: 944f765b84e4c4012876d61f4dfc7b5a, type: 3}
   shootDamage: 3
   shootDist: 150
   shootRate: 0.6
-  ammoCur: 0
+  ammoCur: 10
   ammoMax: 40
   hitEffect: {fileID: 0}
   shootSound:

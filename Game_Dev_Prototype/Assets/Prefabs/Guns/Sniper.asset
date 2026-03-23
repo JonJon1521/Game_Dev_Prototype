@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc6c6c78554c1d41ace7f07b597d40c, type: 3}
   m_Name: Sniper
   m_EditorClassIdentifier: Assembly-CSharp::gunStats
-  gunModel: {fileID: 0}
-  shootDamage: 1
-  shootDist: 3
-  shootRate: 0
-  ammoCur: 0
-  ammoMax: 5
+  gunModel: {fileID: 4698201593948852689, guid: 185ce04d44da342739f0bef843698e6c, type: 3}
+  shootDamage: 10
+  shootDist: 500
+  shootRate: 0.1
+  ammoCur: 3
+  ammoMax: 30
   hitEffect: {fileID: 0}
-  shootSound: []
-  shootSoundVol: 0
+  shootSound:
+  - {fileID: 8300000, guid: 52d857e1075b45444ad3ccd01af6b0e0, type: 3}
+  shootSoundVol: 0.4
