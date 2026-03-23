@@ -53,7 +53,7 @@ MonoBehaviour:
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 8
-  HP: 90
+  HP: 10
   speed: 4
   sprintMod: 3
   jumpSpeed: 12
@@ -61,9 +61,33 @@ MonoBehaviour:
   gravity: 25
   dodgeDistance: 3
   dodgeSpeed: 8
-  shootDamage: 2
-  shootDist: 35
-  shootRate: 0.5
+  gunList: []
+  gunModel: {fileID: 0}
+  aud: {fileID: 0}
+  audJump:
+  - {fileID: 8300000, guid: 091d6043548982c4788b9c53f59a4020, type: 3}
+  - {fileID: 8300000, guid: 017113728d297214eab7614b492c9f69, type: 3}
+  - {fileID: 8300000, guid: e12ac7e4b0a0f354bbcb3d9c236a9f42, type: 3}
+  audJumpVol: 0.5
+  audStep:
+  - {fileID: 8300000, guid: 359edd25c0907fc47b89606751e361cc, type: 3}
+  - {fileID: 8300000, guid: 9c7c8fe2abd86254eb7845286c7ce5e3, type: 3}
+  - {fileID: 8300000, guid: ef2ceeb089468fc49b70e61ebca005c1, type: 3}
+  - {fileID: 8300000, guid: 98a748cd0a9c8f84989e27436ddd7a0b, type: 3}
+  - {fileID: 8300000, guid: 0f0e1a5c57491b34f9d70ff98de50862, type: 3}
+  - {fileID: 8300000, guid: d8f16e43dbc092d49afecbbd0a5b8f78, type: 3}
+  - {fileID: 8300000, guid: b7449fd96f856684a93adc652402d120, type: 3}
+  - {fileID: 8300000, guid: fb47acf2c564bf148a926d3b2bf3617d, type: 3}
+  - {fileID: 8300000, guid: fb47acf2c564bf148a926d3b2bf3617d, type: 3}
+  audStepVol: 0.4
+  audHurt:
+  - {fileID: 8300000, guid: fdcd15b2adb33454c94e3716e874bcb9, type: 3}
+  - {fileID: 8300000, guid: 81ee2f73edae2e94c9e8673d0d263f19, type: 3}
+  - {fileID: 8300000, guid: e0ece09316e39144a8b1b2d2bdc78f62, type: 3}
+  - {fileID: 8300000, guid: 94f3a84acaa912e49bd233f119a00467, type: 3}
+  - {fileID: 8300000, guid: fb3418177fa8016499904a0acca88dd4, type: 3}
+  - {fileID: 8300000, guid: 8c7856dc3cb190d40999e41cc677b803, type: 3}
+  audHurtVol: 0.3
 --- !u!143 &-6308406431859260662
 CharacterController:
   m_ObjectHideFlags: 0
