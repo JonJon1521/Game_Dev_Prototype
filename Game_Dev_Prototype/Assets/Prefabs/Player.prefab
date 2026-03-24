@@ -62,8 +62,9 @@ MonoBehaviour:
   gravity: 25
   dodgeDistance: 3
   dodgeSpeed: 8
-  gunList: []
-  gunModel: {fileID: 0}
+  gunList:
+  - {fileID: 0}
+  gunModel: {fileID: 6541400086939560602}
   aud: {fileID: 2233980036630360323}
   audJump:
   - {fileID: 8300000, guid: 091d6043548982c4788b9c53f59a4020, type: 3}
@@ -645,7 +646,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5322560833376999009}
-  - component: {fileID: 6859751594600653821}
   - component: {fileID: 3938525313076223885}
   - component: {fileID: 8858375188317686119}
   m_Layer: 0
@@ -670,19 +670,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 343685599550447969}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6859751594600653821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6541400086939560602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b1fb691a48e67542ae32b043cd297fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GunPickup
-  gun: {fileID: 11400000, guid: df38e7d3e0a0c50409330d971c7b556d, type: 2}
 --- !u!33 &3938525313076223885
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -690,7 +677,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6541400086939560602}
-  m_Mesh: {fileID: -6642371431653917376, guid: e23ab8f095718425c967ae1e8ad24cf5, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &8858375188317686119
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -716,7 +703,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a3f8898e8f9af43a3b665c72458d32e9, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
