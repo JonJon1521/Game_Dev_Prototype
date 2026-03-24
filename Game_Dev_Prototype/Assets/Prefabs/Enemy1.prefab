@@ -170,7 +170,7 @@ MonoBehaviour:
   shootRate: 5
   shootPos: {fileID: 4428957615239185803}
   gunPivot: {fileID: 861554704955884329}
-  FOV: 45
+  FOV: 200
   faceTargetSpeed: 5
   gunRotateSpeed: 5
   roamPauseTime: 3

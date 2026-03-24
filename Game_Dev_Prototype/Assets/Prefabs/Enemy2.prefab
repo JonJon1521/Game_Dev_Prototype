@@ -170,12 +170,11 @@ MonoBehaviour:
   shootRate: 3
   shootPos: {fileID: 4428957615239185803}
   gunPivot: {fileID: 861554704955884329}
-  FOV: 45
+  FOV: 200
   faceTargetSpeed: 5
   gunRotateSpeed: 5
   roamPauseTime: 3
   roamDistance: 20
-  isManualEnemy: 1
   counted: 0
 --- !u!33 &2880211683430399249
 MeshFilter:
