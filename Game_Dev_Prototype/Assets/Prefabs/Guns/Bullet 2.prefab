@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4975971595179488910}
   - component: {fileID: 5864967227630654849}
   m_Layer: 6
-  m_Name: Bullet
+  m_Name: Bullet 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,9 +51,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::damage
   type: 0
   rigid: {fileID: 5864967227630654849}
-  damageAmount: 2
+  damageAmount: 5
   rateOfDamage: 0
-  speed: 13
+  speed: 7
   destroyTime: 3
   hit: {fileID: 457623119556104996, guid: 688ac795a5454f746879d4c7bca6ac7e, type: 3}
 --- !u!96 &5865065353142497821

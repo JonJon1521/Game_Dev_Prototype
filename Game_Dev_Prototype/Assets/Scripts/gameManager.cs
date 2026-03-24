@@ -28,10 +28,7 @@ public class gamemanager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
+        instance = this;
 
         timeScaleOriginal = Time.timeScale;
 
@@ -44,15 +41,15 @@ public class gamemanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (menuActive == null)
+            if (menuActive != menuPause)
             {
                 statePaused();
                 menuActive = menuPause;
                 menuActive.SetActive(true);
             }
-            else if (menuActive == menuPause)
+            else
             {
                 stateUnpaused();
             }

@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3884498781779323620, guid: 2c5ce95888b2b2b45b9eb3fc73d167e0, type: 3}
       propertyPath: HP
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3884498781779323620, guid: 2c5ce95888b2b2b45b9eb3fc73d167e0, type: 3}
       propertyPath: FOV
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 1768560731456024223}
     - target: {fileID: 3884498781779323620, guid: 2c5ce95888b2b2b45b9eb3fc73d167e0, type: 3}
       propertyPath: shootRate
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3884498781779323620, guid: 2c5ce95888b2b2b45b9eb3fc73d167e0, type: 3}
       propertyPath: isManualEnemy
