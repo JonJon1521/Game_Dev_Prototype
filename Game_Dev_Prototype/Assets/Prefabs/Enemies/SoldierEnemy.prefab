@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 8273661134302695695}
   - component: {fileID: 928830056311584579}
   m_Layer: 0
-  m_Name: Enemy1
+  m_Name: SoldierEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   agent: {fileID: 8273661134302695695}
   HP: 15
   bullet: {fileID: 4677377172591258091, guid: 22ecfb39346b17c4e8f4ba2cf88a4b76, type: 3}
-  shootRate: 5
+  shootRate: 3
   shootPos: {fileID: 4428957615239185803}
   gunPivot: {fileID: 861554704955884329}
   FOV: 200

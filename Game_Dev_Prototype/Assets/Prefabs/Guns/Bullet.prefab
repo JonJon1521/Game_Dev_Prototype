@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::damage
   type: 0
   rigid: {fileID: 5864967227630654849}
-  damageAmount: 2
+  damageAmount: 5
   rateOfDamage: 0
   speed: 13
   destroyTime: 3
