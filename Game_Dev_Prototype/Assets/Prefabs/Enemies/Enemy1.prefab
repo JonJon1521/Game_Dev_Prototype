@@ -166,16 +166,15 @@ MonoBehaviour:
   model: {fileID: 7876080502686056955}
   agent: {fileID: 8273661134302695695}
   HP: 6
-  bullet: {fileID: 4677377172591258091, guid: 22ecfb39346b17c4e8f4ba2cf88a4b76, type: 3}
+  bullet: {fileID: 4677377172591258091, guid: 919f3073ee61f3240b15e608fea80499, type: 3}
   shootRate: 3
   shootPos: {fileID: 4428957615239185803}
   gunPivot: {fileID: 861554704955884329}
-  FOV: 45
+  FOV: 180
   faceTargetSpeed: 5
   gunRotateSpeed: 5
   roamPauseTime: 3
   roamDistance: 20
-  isManualEnemy: 1
   counted: 0
 --- !u!33 &2880211683430399249
 MeshFilter:

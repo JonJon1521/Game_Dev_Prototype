@@ -175,7 +175,6 @@ MonoBehaviour:
   gunRotateSpeed: 5
   roamPauseTime: 3
   roamDistance: 20
-  isManualEnemy: 1
   counted: 0
 --- !u!33 &2880211683430399249
 MeshFilter:

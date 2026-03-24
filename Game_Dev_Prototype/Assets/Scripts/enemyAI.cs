@@ -40,8 +40,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [SerializeField] int roamDistance;
 
-    //[Header("Manual Enemy")]
-    [SerializeField] private bool isManualEnemy = true;
+   
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -76,17 +75,13 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         colorOrig = model.material.color;
 
-       // gameManager.instance.updateGameGoal(1);
+        //gamemanager.instance.updateGameGoal(1);
 
         startingPos = transform.position;
 
         stoppingDistOrig = agent.stoppingDistance;
 
-        if (isManualEnemy && !counted)
-        {
-            gamemanager.instance.updateGameGoal(1);
-            counted = true;
-        }
+        
     }
 
     // Update is called once per frame
