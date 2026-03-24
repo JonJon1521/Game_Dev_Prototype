@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::enemyAI
   model: {fileID: 9028507712380004311}
   agent: {fileID: 6378337589763332774}
-  HP: 10
+  HP: 5
   bullet: {fileID: 4677377172591258091, guid: 9f7347d19abd2c449806d60d252c86fe, type: 3}
   shootRate: 2
   shootPos: {fileID: 5170642079409687880}
