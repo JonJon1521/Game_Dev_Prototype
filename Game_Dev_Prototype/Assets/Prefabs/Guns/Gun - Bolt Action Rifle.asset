@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::gunStats
   gunModel: {fileID: 4698201593948852689, guid: 185ce04d44da342739f0bef843698e6c, type: 3}
   shootDamage: 6
-  shootDist: 300
+  shootDist: 100
   shootRate: 1
-  ammoCur: 40
+  ammoCur: 36
   ammoMax: 40
   hitEffect: {fileID: 457623119556104996, guid: 688ac795a5454f746879d4c7bca6ac7e, type: 3}
-  shootSound: []
+  shootSound:
+  - {fileID: 8300000, guid: 52d857e1075b45444ad3ccd01af6b0e0, type: 3}
   shootSoundVol: 0.5
