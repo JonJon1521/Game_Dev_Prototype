@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 
 
-public class gameManager : MonoBehaviour
+public class gamemanager : MonoBehaviour
 {
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
@@ -24,7 +24,7 @@ public class gameManager : MonoBehaviour
 
     private int gameGoalCount;
 
-    public static gameManager instance;
+    public static gamemanager instance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {

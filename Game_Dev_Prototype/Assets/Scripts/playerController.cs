@@ -67,7 +67,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     // Update is called once per frame
     void Update()
     {
-        if (!gameManager.instance.isPaused)
+        if (!gamemanager.instance.isPaused)
             movement();
         sprint();
         HandleDodgeInput();
@@ -96,7 +96,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     }
     public void spawnPlayer()
     {
-        controller.transform.position = gameManager.instance.playerSpawnPos.transform.position;
+        controller.transform.position = gamemanager.instance.playerSpawnPos.transform.position;
         Physics.SyncTransforms();
         HP = HPOriginal;
         updatePlayerUI();
@@ -242,32 +242,32 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         if (HP <= 0)
         {
             // Fully qualify if needed
-            global::gameManager.instance.youLose();
+            global::gamemanager.instance.youLose();
         }
     }
     IEnumerator flashDamage()
     {
-        gameManager.instance.damagePlayerFlash.SetActive(true);
+        gamemanager.instance.damagePlayerFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        gameManager.instance.damagePlayerFlash.SetActive(false);
+        gamemanager.instance.damagePlayerFlash.SetActive(false);
     }
 
 
 
     public void updatePlayerUI()
     {
-        gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
+        gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
     }
 
     public void takeDamage(int amount)
     {
         HP -= amount;
 
-        gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
+        gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
 
         if (HP <= 0)
         {
-            gameManager.instance.youLose();
+            gamemanager.instance.youLose();
         }
     }
     public void getGunStats(gunStats gun)

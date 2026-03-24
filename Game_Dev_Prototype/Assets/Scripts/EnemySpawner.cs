@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
         // Count manual enemy
         if (manualEnemy != null && !manualEnemy.counted)
         {
-            gameManager.instance.updateGameGoal(1);
+            gamemanager.instance.updateGameGoal(1);
             manualEnemy.counted = true;
         }
 
@@ -115,7 +115,7 @@ public class EnemySpawner : MonoBehaviour
         enemyAI ai = enemy.GetComponent<enemyAI>();
         if (ai != null && !ai.counted)
         {
-            gameManager.instance.updateGameGoal(1);
+            gamemanager.instance.updateGameGoal(1);
             ai.counted = true; // mark this instance as counted
         }
 
