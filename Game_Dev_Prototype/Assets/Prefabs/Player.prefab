@@ -62,8 +62,7 @@ MonoBehaviour:
   gravity: 25
   dodgeDistance: 3
   dodgeSpeed: 8
-  gunList:
-  - {fileID: 0}
+  gunList: []
   gunModel: {fileID: 6541400086939560602}
   aud: {fileID: 2233980036630360323}
   audJump:
@@ -378,7 +377,7 @@ Camera:
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!81 &3617430559590255331
@@ -648,7 +647,7 @@ GameObject:
   - component: {fileID: 5322560833376999009}
   - component: {fileID: 3938525313076223885}
   - component: {fileID: 8858375188317686119}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Gun Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

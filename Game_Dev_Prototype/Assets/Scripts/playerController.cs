@@ -59,7 +59,8 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     {
         HPOriginal = HP;
         spawnPlayer();
-
+        if (gunList.Count > 0)
+            gunListPos = 0;
 
 
     }
@@ -75,7 +76,8 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     IEnumerator playStep()
     {
         isPlayingStep = true;
-        if (audStep.Length > 0)
+
+        if (aud != null && audStep != null && audStep.Length > 0)
         {
             aud.PlayOneShot(audStep[Random.Range(0, audStep.Length)], audStepVol);
         }
@@ -83,16 +85,13 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         if (isSprinting)
         {
             yield return new WaitForSeconds(0.5f);
-
         }
-
         else
         {
             yield return new WaitForSeconds(0.3f);
         }
-        isPlayingStep = false;
 
-       
+        isPlayingStep = false;
     }
     public void spawnPlayer()
     {
@@ -130,9 +129,10 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
         selectGun();
 
-        if (moveDir.normalized.magnitude > 0.3f && !isPlayingStep)
+        if (aud != null && audStep.Length > 0 && moveDir.normalized.magnitude > 0.3f && !isPlayingStep)
         {
-            StartCoroutine(playStep());
+            
+                StartCoroutine(playStep());
         }
     }
 
@@ -165,7 +165,6 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     void shoot()
     {
-
         shootTimer = 0;
 
         gunList[gunListPos].ammoCur--;
@@ -175,8 +174,11 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         if (Physics.Raycast(transform.position, transform.forward, out hit, gunList[gunListPos].shootDist, ~ignoreLayer))
         {
             if (gunList[gunListPos].hitEffect != null)
-
-                Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            {
+                ParticleSystem effect = Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                effect.Play();
+                Destroy(effect.gameObject, 2f); 
+            }
 
             Debug.Log(hit.collider.name);
             IDamage dmg = hit.collider.GetComponent<IDamage>();
