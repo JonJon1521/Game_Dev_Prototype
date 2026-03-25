@@ -363,10 +363,12 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
         gunStats gun = gunList[gunListPos];
 
-        int missingAmmo = gun.ammoMax - gunAmmoCur[gunListPos];
-        if (missingAmmo > 0)
+        if (gunAmmoCur[gunListPos] < gun.ammoMax)
         {
-            gunAmmoCur[gunListPos] = gun.ammoMax;
+            int missingAmmo = gun.ammoMax - gunAmmoCur[gunListPos];
+            gunAmmoCur[gunListPos] += missingAmmo;
+            gun.ammoMax -= missingAmmo; // deplete max
+
             gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gun.ammoMax);
 
             if (gun.reloadSound != null)
