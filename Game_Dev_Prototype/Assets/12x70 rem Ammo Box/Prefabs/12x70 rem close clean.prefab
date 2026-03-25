@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8449002457764904063}
+  - component: {fileID: -715522608432756033}
   - component: {fileID: 8449002457762036831}
   - component: {fileID: 8449002457763135135}
   - component: {fileID: 8284353890736580455}
@@ -34,6 +35,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-715522608432756033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8449002457765060703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d06e67e985a62244970798575a1d6a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ammoPickup
+  ammoAmount: 0
+  playerScript: {fileID: 0}
 --- !u!33 &8449002457762036831
 MeshFilter:
   m_ObjectHideFlags: 0
