@@ -224,9 +224,14 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         // Play shooting sound
         aud.PlayOneShot(gun.shootSound[Random.Range(0, gun.shootSound.Length)], gun.shootSoundVol);
 
-        // Raycast
+        // Raycast start slightly in front of camera to avoid hitting gun
+        Vector3 rayOrigin = Camera.main.transform.position + Camera.main.transform.forward * 0.5f;
+
+        // Ignore Gun Camera layer (includes gun model) and Player
+        int layerMask = ~LayerMask.GetMask("Gun Camera", "Player");
+
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, gun.shootDist, ~ignoreLayer))
+        if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit, gun.shootDist, layerMask))
         {
             // Spawn hit effect (appears at hit point)
             if (gun.hitEffect != null)
