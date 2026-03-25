@@ -68,6 +68,8 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     bool isDodging = false;
 
+    public int CurrentGunPos => gunListPos;
+
 
     List<int> gunAmmoCur = new List<int>();
     List<int> gunTotalAmmo = new List<int>();
@@ -374,5 +376,16 @@ public class playerController : MonoBehaviour, IDamage, IPickup
             if (gun.reloadSound != null)
                 aud.PlayOneShot(gun.reloadSound, gun.reloadSoundVol);
         }
+    }
+    public void AddAmmo(int amount)
+    {
+        if (gunList.Count == 0) return;
+
+        gunAmmoCur[gunListPos] += amount;
+
+        if (gunAmmoCur[gunListPos] > gunList[gunListPos].ammoMax)
+            gunAmmoCur[gunListPos] = gunList[gunListPos].ammoMax;
+
+        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunList[gunListPos].ammoMax);
     }
 }
