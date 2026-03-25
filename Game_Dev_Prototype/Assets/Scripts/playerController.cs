@@ -58,10 +58,6 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     int HPOriginal;
     int gunListPos;
 
-
-
-    int gunListPos;
-
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     float shootTimer;
@@ -187,10 +183,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     void shoot()
     {
-        gunList[gunListPos].ammoCur--;
-
-        aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
-
+        
         shootTimer = 0;
 
         gunList[gunListPos].ammoCur--;
@@ -341,7 +334,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
             HP = HPOriginal; // then we want our HP to be equal to our Original HP
         }
 
-        gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal; // have to update the HP bar 
+        gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal; // have to update the HP bar 
 
         Debug.Log("Healed! HP:" + HP);
     }
