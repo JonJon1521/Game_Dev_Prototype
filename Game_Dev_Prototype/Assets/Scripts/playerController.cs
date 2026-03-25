@@ -68,6 +68,10 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     bool isDodging = false;
 
+
+    List<int> gunAmmoCur = new List<int>();
+    List<int> gunTotalAmmo = new List<int>();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -83,9 +87,16 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     void Update()
     {
         if (gamemanager.instance != null && !gamemanager.instance.isPaused)
+        {
             movement();
-        sprint();
-        HandleDodgeInput();
+            sprint();
+            HandleDodgeInput();
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                reload();
+            }
+        }
     }
     IEnumerator playStep()
     {
@@ -106,7 +117,10 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         }
 
         isPlayingStep = false;
+
+
     }
+
     public void spawnPlayer()
     {
         controller.transform.position = gamemanager.instance.playerSpawnPos.transform.position;
@@ -136,11 +150,11 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         playerVel.y -= gravity * Time.deltaTime;
 
 
-        if (Input.GetButtonDown("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= gunList[gunListPos].shootRate)
+        if (Input.GetButtonDown("Fire1") && gunList.Count > 0 && gunAmmoCur[gunListPos] > 0 && shootTimer >= gunList[gunListPos].shootRate)
         {
             shoot();
         }
-
+      
         selectGun();
 
         if (aud != null && audStep.Length > 0 && moveDir.normalized.magnitude > 0.3f && !isPlayingStep)
@@ -178,31 +192,40 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
 
     void shoot()
+{
+    if (gunList.Count == 0) return;
+
+    gunStats gun = gunList[gunListPos];
+
+    // Auto-reload if empty
+    if (gunAmmoCur[gunListPos] <= 0)
+        reload();
+
+    // If still empty after reload, cannot shoot
+    if (gunAmmoCur[gunListPos] <= 0) return;
+
+    shootTimer = 0;
+
+    // Fire the shot
+    gunAmmoCur[gunListPos]--;
+    gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gun.ammoMax);
+
+    aud.PlayOneShot(gun.shootSound[Random.Range(0, gun.shootSound.Length)], gun.shootSoundVol);
+
+    RaycastHit hit;
+    if (Physics.Raycast(transform.position, transform.forward, out hit, gun.shootDist, ~ignoreLayer))
     {
-        shootTimer = 0;
-
-        gunList[gunListPos].ammoCur--;
-        aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
-
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, gunList[gunListPos].shootDist, ~ignoreLayer))
+        if (gun.hitEffect != null)
         {
-            if (gunList[gunListPos].hitEffect != null)
-            {
-                ParticleSystem effect = Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
-                effect.Play();
-                Destroy(effect.gameObject, 2f); 
-            }
-
-            Debug.Log(hit.collider.name);
-            IDamage dmg = hit.collider.GetComponentInParent<IDamage>();
-            if (dmg != null)
-            {
-                dmg.takeDamage(gunList[gunListPos].shootDamage);
-            }
+            ParticleSystem effect = Instantiate(gun.hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            effect.Play();
+            Destroy(effect.gameObject, 2f);
         }
-    }
 
+        IDamage dmg = hit.collider.GetComponentInParent<IDamage>();
+        if (dmg != null) dmg.takeDamage(gun.shootDamage);
+    }
+}
 
     void HandleDodgeInput()
     {
@@ -275,18 +298,22 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
     }
 
-   
+
     public void getGunStats(gunStats gun)
     {
         gunList.Add(gun);
+        gunAmmoCur.Add(gun.ammoCur);
+        gunTotalAmmo.Add(gun.totalAmmo);
         gunListPos = gunList.Count - 1;
         changeGun();
+        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gun.ammoMax);
     }
 
     void changeGun()
     {
         gunModel.GetComponent<MeshFilter>().mesh = gunList[gunListPos].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunList[gunListPos].ammoMax);
     }
     void selectGun()
     {
@@ -314,6 +341,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         HP += amount;
         HP = Mathf.Clamp(HP, 0, HPOriginal);
         updatePlayerUI();
+<<<<<<< Updated upstream
     }  
 
     public void refill(int amount)
@@ -326,6 +354,24 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
             updatePlayerUI();
         }
+=======
+>>>>>>> Stashed changes
     }
 
+    public void reload()
+    {
+        if (gunList.Count == 0) return;
+
+        gunStats gun = gunList[gunListPos];
+
+        int missingAmmo = gun.ammoMax - gunAmmoCur[gunListPos];
+        if (missingAmmo > 0)
+        {
+            gunAmmoCur[gunListPos] = gun.ammoMax;
+            gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gun.ammoMax);
+
+            if (gun.reloadSound != null)
+                aud.PlayOneShot(gun.reloadSound, gun.reloadSoundVol);
+        }
+    }
 }

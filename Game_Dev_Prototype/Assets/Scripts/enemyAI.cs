@@ -129,6 +129,8 @@ public class enemyAI : MonoBehaviour, IDamage
 
     bool canSeePlayer()
     {
+        if (gamemanager.instance == null || gamemanager.instance.player == null) return false;
+
         playerDir = gamemanager.instance.player.transform.position - transform.position;
 
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);

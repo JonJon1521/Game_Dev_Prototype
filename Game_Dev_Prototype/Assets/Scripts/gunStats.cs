@@ -5,11 +5,15 @@ using UnityEngine.Rendering;
 [CreateAssetMenu]
 public class gunStats : ScriptableObject
 {
+    [Header("Reload Audio")]
+    public AudioClip reloadSound;
+    public float reloadSoundVol = 1f;
     public GameObject gunModel;
 
     [Range(1, 10)] public int shootDamage;
     [Range(3, 1000)] public int shootDist;
     [Range(0, 1)] public float shootRate;
+    public int totalAmmo;
 
     public int ammoCur;
     [Range(5, 40)] public int ammoMax;

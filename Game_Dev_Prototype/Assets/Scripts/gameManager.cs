@@ -11,6 +11,8 @@ public class gamemanager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] int gameGoal;
     [SerializeField] TMP_Text gameGoalCountText;
+    [SerializeField] TMP_Text ammoCurrentText;
+    [SerializeField] TMP_Text ammoMaxText;
 
     public Image playerHPBar;
     public GameObject player;
@@ -96,4 +98,11 @@ public class gamemanager : MonoBehaviour
         menuActive = menuLose;
         menuLose.SetActive(true);
     }
+    public void updateAmmoUI(int current, int max)
+    {
+        ammoCurrentText.text = current.ToString();
+        ammoMaxText.text = max.ToString();
+    }
+
+
 }
