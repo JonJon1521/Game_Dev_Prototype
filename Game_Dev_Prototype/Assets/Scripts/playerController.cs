@@ -194,40 +194,37 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
 
     void shoot()
-{
-    if (gunList.Count == 0) return;
-
-    gunStats gun = gunList[gunListPos];
-
-    // Auto-reload if empty
-    if (gunAmmoCur[gunListPos] <= 0)
-        reload();
-
-    // If still empty after reload, cannot shoot
-    if (gunAmmoCur[gunListPos] <= 0) return;
-
-    shootTimer = 0;
-
-    // Fire the shot
-    gunAmmoCur[gunListPos]--;
-    gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gun.ammoMax);
-
-    aud.PlayOneShot(gun.shootSound[Random.Range(0, gun.shootSound.Length)], gun.shootSoundVol);
-
-    RaycastHit hit;
-    if (Physics.Raycast(transform.position, transform.forward, out hit, gun.shootDist, ~ignoreLayer))
     {
-        if (gun.hitEffect != null)
-        {
-            ParticleSystem effect = Instantiate(gun.hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            effect.Play();
-            Destroy(effect.gameObject, 2f);
-        }
+        if (gunList.Count == 0 || gunAmmoCur[gunListPos] <= 0) return;
 
-        IDamage dmg = hit.collider.GetComponentInParent<IDamage>();
-        if (dmg != null) dmg.takeDamage(gun.shootDamage);
+        gunStats gun = gunList[gunListPos];
+
+        shootTimer = 0;
+        gunAmmoCur[gunListPos]--;
+        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gun.ammoMax);
+
+        // Play gun sound
+        if (aud != null && gun.shootSound.Length > 0)
+            aud.PlayOneShot(gun.shootSound[Random.Range(0, gun.shootSound.Length)], gun.shootSoundVol);
+
+        // Raycast to check if we hit something
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, gun.shootDist, ~ignoreLayer))
+        {
+            // Spawn hit effect only if we hit
+            if (gun.hitEffect != null)
+            {
+                ParticleSystem effect = Instantiate(gun.hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                effect.Play();
+                Destroy(effect.gameObject, 2f);
+            }
+
+            // Deal damage if target implements IDamage
+            IDamage dmg = hit.collider.GetComponentInParent<IDamage>();
+            if (dmg != null)
+                dmg.takeDamage(gun.shootDamage);
+        }
     }
-}
 
     void HandleDodgeInput()
     {
