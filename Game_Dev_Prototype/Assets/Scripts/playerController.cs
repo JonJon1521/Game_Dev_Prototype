@@ -336,7 +336,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
         gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal; // have to update the HP bar 
 
-        Debug.Log("Healed! HP:" + HP);
+        Debug.Log("Healed! HP:" + HP); // log the current HP to the consol for testing
     }
 
 }
