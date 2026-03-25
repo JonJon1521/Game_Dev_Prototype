@@ -301,6 +301,6 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         HP += amount;
         HP = Mathf.Clamp(HP, 0, HPOriginal);
         updatePlayerUI();
-    }
+    } 
 
 }
