@@ -1,7 +1,8 @@
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 
 
@@ -11,6 +12,8 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     [Header("Stats")]
     [Range(1, 1000)][SerializeField] int HP;
     [Range(1, 10)][SerializeField] int speed;
@@ -19,22 +22,55 @@ public class playerController : MonoBehaviour, IDamage
     [Range(1, 4)][SerializeField] int jumptimesMax;
     [Range(15, 50)][SerializeField] int gravity;
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     [Header("Dodge Settings")]
     [SerializeField] float dodgeDistance = 3f;
     [SerializeField] float dodgeSpeed = 8f;
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     [Header("Guns")]
-    [SerializeField] int shootDamage;
-    [SerializeField] int shootDist;
-    [SerializeField] float shootRate;
+
+    [SerializeField] List<gunStats> gunList = new List<gunStats>();
+
+    [SerializeField] GameObject gunModel;
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    [Header("~~~~~~~ Audio ~~~~~~~~")]
+
+    [SerializeField] AudioSource aud;
+
+    [SerializeField] AudioClip[] audJump;
+
+    [SerializeField] float audJumpVol;
+
+    [SerializeField] AudioClip[] audHurt;
+
+    [SerializeField] float audHurtVol;
+
+    [SerializeField] AudioClip[] audStep;
+
+    [SerializeField] float audStepVol;
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     int jumpCount;
     int HPOriginal;
 
+    int gunListPos;
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     float shootTimer;
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Vector3 moveDir;
     Vector3 playerVel;
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     bool isDodging = false;
 
@@ -73,7 +109,7 @@ public class playerController : MonoBehaviour, IDamage
         playerVel.y -= gravity * Time.deltaTime;
 
 
-        if (Input.GetButtonDown("Fire1") && shootTimer >= shootRate)
+        if (Input.GetButtonDown("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= gunList[gunListPos].shootRate)
         {
             shoot();
         }
@@ -102,15 +138,24 @@ public class playerController : MonoBehaviour, IDamage
 
     void shoot()
     {
+        gunList[gunListPos].ammoCur--;
+
+        aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
+
         shootTimer = 0;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, shootDist, ~ignoreLayer))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, gunList[gunListPos].shootDist, ~ignoreLayer))
         {
+            if (gunList[gunListPos].hitEffect)
+            {
+                Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.identity);
+            }
+
             Debug.Log(hit.collider.name);
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             if (dmg != null)
             {
-                dmg.takeDamage(shootDamage);
+                dmg.takeDamage(gunList[gunListPos].shootDamage);
             }
         }
     }
@@ -195,6 +240,20 @@ public class playerController : MonoBehaviour, IDamage
     public void removeSlowSpeed(int amount)
     {
         speed = speed * amount; // takes our current (slow) speed and adds the 'amount' back to it
+    }
+
+    public void heal(int amount) // for health kits 
+    {
+        HP += amount; // we want to add the amount to our health
+
+        if(HP > HPOriginal) // keeps the HP from going over the original hp
+        {
+            HP = HPOriginal; // then we want our HP to be equal to our Original HP
+        }
+
+        gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal; // have to update the HP bar 
+
+        Debug.Log("Healed! HP:" + HP);
     }
 
 }
