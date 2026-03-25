@@ -226,7 +226,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
         // Raycast
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, gun.shootDist, ~ignoreLayer))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, gun.shootDist, ~ignoreLayer))
         {
             // Spawn hit effect (appears at hit point)
             if (gun.hitEffect != null)
