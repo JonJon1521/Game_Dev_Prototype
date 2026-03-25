@@ -92,7 +92,6 @@ public class cameraController : MonoBehaviour
 
 
 
-
     public void shack(float dur, float mag) // dur = duration, mag = magnitud
     {
         StartCoroutine(ProcessShack(dur, mag)); // start the Coroutine

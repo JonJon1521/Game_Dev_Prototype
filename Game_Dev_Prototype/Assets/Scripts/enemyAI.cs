@@ -209,33 +209,38 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         HP -= amount;
 
-        agent.SetDestination(gamemanager.instance.player.transform.position);
+        //agent.SetDestination(gameManager.instance.player.transform.position);
 
         if (HP <= 0)
         {
             // Enemy is dead
-            //StopAllCoroutines();
+            StopAllCoroutines();
 
+            if (counted)
+            {
+                gamemanager.instance.updateGameGoal(-1);
+                counted = false;
+            }
+               
 
-            gamemanager.instance.updateGameGoal(-1);
             Destroy(gameObject);
         }
         else
         {
-           // if (model != null)
+            if (model != null)
                 StartCoroutine(flashRed());
         }
     }
 
     IEnumerator flashRed()
     {
-        //if (model == null) yield break;
+        if (model == null) yield break;
 
         model.material.color = Color.red;
 
         yield return new WaitForSeconds(0.1f);
 
-       // if (model != null)
+        if (model != null)
             model.material.color = colorOrig;
     }
 }
