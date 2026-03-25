@@ -73,6 +73,9 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     List<int> gunAmmoCur = new List<int>();
     List<int> gunTotalAmmo = new List<int>();
+    List<int> gunAmmoMaxOriginal = new List<int>();
+    List<int> gunAmmoCurOriginal = new List<int>();
+    List<int> gunAmmoMaxSession = new List<int>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -127,11 +130,21 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     {
         controller.transform.position = gamemanager.instance.playerSpawnPos.transform.position;
         Physics.SyncTransforms();
+
         HP = HPOriginal;
         updatePlayerUI();
 
-    }
+        // Reset all ammo and session max
+        for (int i = 0; i < gunList.Count; i++)
+        {
+            gunAmmoCur[i] = gunAmmoCurOriginal[i];
+            gunAmmoMaxSession[i] = gunAmmoMaxOriginal[i];
+        }
 
+        // Update UI for current gun
+        if (gunList.Count > 0)
+            gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
+    }
 
     void movement()
     {
@@ -303,9 +316,17 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         gunList.Add(gun);
         gunAmmoCur.Add(gun.ammoCur);
         gunTotalAmmo.Add(gun.totalAmmo);
+
+        // Store originals
+        gunAmmoCurOriginal.Add(gun.ammoCur);
+        gunAmmoMaxOriginal.Add(gun.ammoMax);
+
+        // Session max for depletion
+        gunAmmoMaxSession.Add(gun.ammoMax);
+
         gunListPos = gunList.Count - 1;
         changeGun();
-        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gun.ammoMax);
+        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
     }
 
     void changeGun()
@@ -343,35 +364,27 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     }  
 
-    public void refill(int amount)
-    {
-        if (gunList.Count > 0)
-        {
-            gunList[gunListPos].ammoCur += amount;
-
-            gunList[gunListPos].ammoCur = Mathf.Clamp(gunList[gunListPos].ammoCur, 0, gunList[gunListPos].ammoMax);
-
-            updatePlayerUI();
-        }
-
-    }
-
     public void reload()
     {
-        if (gunList.Count == 0) return;
+        if (gunList.Count == 0 || gunListPos < 0 || gunListPos >= gunList.Count)
+            return;
 
-        gunStats gun = gunList[gunListPos];
+        // How much ammo we can add
+        int missingAmmo = gunAmmoCurOriginal[gunListPos] - gunAmmoCur[gunListPos];
 
-        if (gunAmmoCur[gunListPos] < gun.ammoMax)
+        // Make sure session max is enough
+        if (missingAmmo > gunAmmoMaxSession[gunListPos])
+            missingAmmo = gunAmmoMaxSession[gunListPos];
+
+        if (missingAmmo > 0)
         {
-            int missingAmmo = gun.ammoMax - gunAmmoCur[gunListPos];
             gunAmmoCur[gunListPos] += missingAmmo;
-            gun.ammoMax -= missingAmmo; // deplete max
+            gunAmmoMaxSession[gunListPos] -= missingAmmo;
 
-            gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gun.ammoMax);
+            gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
 
-            if (gun.reloadSound != null)
-                aud.PlayOneShot(gun.reloadSound, gun.reloadSoundVol);
+            if (gunList[gunListPos].reloadSound != null)
+                aud.PlayOneShot(gunList[gunListPos].reloadSound, gunList[gunListPos].reloadSoundVol);
         }
     }
     public void AddAmmo(int amount)
@@ -380,9 +393,10 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
         gunAmmoCur[gunListPos] += amount;
 
-        if (gunAmmoCur[gunListPos] > gunList[gunListPos].ammoMax)
-            gunAmmoCur[gunListPos] = gunList[gunListPos].ammoMax;
+        // Clamp to session max
+        if (gunAmmoCur[gunListPos] > gunAmmoMaxSession[gunListPos])
+            gunAmmoCur[gunListPos] = gunAmmoMaxSession[gunListPos];
 
-        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunList[gunListPos].ammoMax);
+        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
     }
 }
