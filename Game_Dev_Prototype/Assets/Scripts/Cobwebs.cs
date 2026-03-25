@@ -18,7 +18,7 @@ public class Cobwebs : MonoBehaviour
             }
         }
     }
-
+     
     private void OnTriggerExit(Collider other) // runs this as soon as the collider exits the trigger
     {
         if(other.CompareTag("Player")) // check to see if our object toughing is tagged as teh player
