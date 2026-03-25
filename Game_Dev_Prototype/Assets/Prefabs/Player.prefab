@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.34783, y: 1.5, z: -8.85177}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2.0217671, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 343685599550447969}
@@ -54,13 +54,13 @@ MonoBehaviour:
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 8
-  HP: 10
+  HP: 100
   speed: 4
   sprintMod: 3
   jumpSpeed: 12
   jumptimesMax: 1
   gravity: 25
-  dodgeDistance: 3
+  dodgeDistance: 4
   dodgeSpeed: 8
   gunList: []
   gunModel: {fileID: 6541400086939560602}
@@ -70,6 +70,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 017113728d297214eab7614b492c9f69, type: 3}
   - {fileID: 8300000, guid: e12ac7e4b0a0f354bbcb3d9c236a9f42, type: 3}
   audJumpVol: 0.5
+  audHurt:
+  - {fileID: 8300000, guid: fdcd15b2adb33454c94e3716e874bcb9, type: 3}
+  - {fileID: 8300000, guid: 81ee2f73edae2e94c9e8673d0d263f19, type: 3}
+  - {fileID: 8300000, guid: e0ece09316e39144a8b1b2d2bdc78f62, type: 3}
+  - {fileID: 8300000, guid: 94f3a84acaa912e49bd233f119a00467, type: 3}
+  - {fileID: 8300000, guid: fb3418177fa8016499904a0acca88dd4, type: 3}
+  - {fileID: 8300000, guid: 8c7856dc3cb190d40999e41cc677b803, type: 3}
+  audHurtVol: 0.3
   audStep:
   - {fileID: 8300000, guid: 359edd25c0907fc47b89606751e361cc, type: 3}
   - {fileID: 8300000, guid: 9c7c8fe2abd86254eb7845286c7ce5e3, type: 3}
@@ -81,14 +89,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fb47acf2c564bf148a926d3b2bf3617d, type: 3}
   - {fileID: 8300000, guid: fb47acf2c564bf148a926d3b2bf3617d, type: 3}
   audStepVol: 0.4
-  audHurt:
-  - {fileID: 8300000, guid: fdcd15b2adb33454c94e3716e874bcb9, type: 3}
-  - {fileID: 8300000, guid: 81ee2f73edae2e94c9e8673d0d263f19, type: 3}
-  - {fileID: 8300000, guid: e0ece09316e39144a8b1b2d2bdc78f62, type: 3}
-  - {fileID: 8300000, guid: 94f3a84acaa912e49bd233f119a00467, type: 3}
-  - {fileID: 8300000, guid: fb3418177fa8016499904a0acca88dd4, type: 3}
-  - {fileID: 8300000, guid: 8c7856dc3cb190d40999e41cc677b803, type: 3}
-  audHurtVol: 0.3
 --- !u!143 &-6308406431859260662
 CharacterController:
   m_ObjectHideFlags: 0
