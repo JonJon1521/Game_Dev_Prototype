@@ -341,7 +341,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         HP += amount;
         HP = Mathf.Clamp(HP, 0, HPOriginal);
         updatePlayerUI();
-<<<<<<< Updated upstream
+
     }  
 
     public void refill(int amount)
@@ -354,8 +354,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
             updatePlayerUI();
         }
-=======
->>>>>>> Stashed changes
+
     }
 
     public void reload()
