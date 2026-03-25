@@ -1,0 +1,22 @@
+using UnityEngine;
+using System.Collections;
+public class Checkpoint : MonoBehaviour
+{
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && gamemanager.instance.playerSpawnPos.transform.position != transform.position)
+        {
+            gamemanager.instance.playerSpawnPos.transform.position = transform.position;
+            StartCoroutine(showPopup());
+        }
+    }
+    IEnumerator showPopup()
+    {
+        gamemanager.instance.checkpointPopup.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        gamemanager.instance.checkpointPopup.SetActive(false);
+    }
+}
+

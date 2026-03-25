@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections.Generic;
+using System.Collections;
 
 
 
-public class playerController : MonoBehaviour, IDamage
+public class playerController : MonoBehaviour, IDamage, IPickup
 {
     [Header("Compontents")]
     [SerializeField] CharacterController controller;
@@ -15,7 +13,7 @@ public class playerController : MonoBehaviour, IDamage
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     [Header("Stats")]
-    [Range(1, 1000)][SerializeField] int HP;
+    [Range(1, 100)][SerializeField] int HP;
     [Range(1, 10)][SerializeField] int speed;
     [Range(2, 6)][SerializeField] int sprintMod;
     [Range(5, 25)][SerializeField] int jumpSpeed;
@@ -58,6 +56,9 @@ public class playerController : MonoBehaviour, IDamage
 
     int jumpCount;
     int HPOriginal;
+    int gunListPos;
+
+
 
     int gunListPos;
 
@@ -65,7 +66,8 @@ public class playerController : MonoBehaviour, IDamage
 
     float shootTimer;
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    bool isPlayingStep;
+    bool isSprinting;
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -78,17 +80,50 @@ public class playerController : MonoBehaviour, IDamage
     void Start()
     {
         HPOriginal = HP;
-        updatePlayerUI();
+        spawnPlayer();
+        if (gunList.Count > 0)
+            gunListPos = 0;
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        movement();
+        if (gamemanager.instance != null && !gamemanager.instance.isPaused)
+            movement();
         sprint();
         HandleDodgeInput();
     }
+    IEnumerator playStep()
+    {
+        isPlayingStep = true;
+
+        if (aud != null && audStep != null && audStep.Length > 0)
+        {
+            aud.PlayOneShot(audStep[Random.Range(0, audStep.Length)], audStepVol);
+        }
+
+        if (isSprinting)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        isPlayingStep = false;
+    }
+    public void spawnPlayer()
+    {
+        controller.transform.position = gamemanager.instance.playerSpawnPos.transform.position;
+        Physics.SyncTransforms();
+        HP = HPOriginal;
+        updatePlayerUI();
+
+    }
+
 
     void movement()
     {
@@ -113,7 +148,16 @@ public class playerController : MonoBehaviour, IDamage
         {
             shoot();
         }
+
+        selectGun();
+
+        if (aud != null && audStep.Length > 0 && moveDir.normalized.magnitude > 0.3f && !isPlayingStep)
+        {
+            
+                StartCoroutine(playStep());
+        }
     }
+
 
     void jump()
     {
@@ -121,20 +165,25 @@ public class playerController : MonoBehaviour, IDamage
         {
             playerVel.y = jumpSpeed;
             jumpCount++;
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
         }
     }
+
 
     void sprint()
     {
         if (Input.GetButtonDown("Sprint"))
         {
             speed *= sprintMod;
+            isSprinting = true;
         }
         else if (Input.GetButtonUp("Sprint"))
         {
             speed /= sprintMod;
+            isSprinting = false;
         }
     }
+
 
     void shoot()
     {
@@ -143,12 +192,18 @@ public class playerController : MonoBehaviour, IDamage
         aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
 
         shootTimer = 0;
+
+        gunList[gunListPos].ammoCur--;
+        aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
+
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, gunList[gunListPos].shootDist, ~ignoreLayer))
         {
-            if (gunList[gunListPos].hitEffect)
+            if (gunList[gunListPos].hitEffect != null)
             {
-                Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.identity);
+                ParticleSystem effect = Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                effect.Play();
+                Destroy(effect.gameObject, 2f); 
             }
 
             Debug.Log(hit.collider.name);
@@ -159,6 +214,7 @@ public class playerController : MonoBehaviour, IDamage
             }
         }
     }
+
 
     void HandleDodgeInput()
     {
@@ -208,38 +264,72 @@ public class playerController : MonoBehaviour, IDamage
     public void TakeDamage(int damage)
     {
         HP -= damage;
+        updatePlayerUI();
+        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
+        StartCoroutine(flashDamage());
         if (HP <= 0)
         {
             // Fully qualify if needed
-            global::gameManager.instance.youLose();
+            global::gamemanager.instance.youLose();
         }
     }
+    IEnumerator flashDamage()
+    {
+        gamemanager.instance.damagePlayerFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gamemanager.instance.damagePlayerFlash.SetActive(false);
+    }
+
+
 
     public void updatePlayerUI()
     {
-        gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
+        gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
     }
 
     public void takeDamage(int amount)
     {
         HP -= amount;
 
-        gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
+        gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
 
         if (HP <= 0)
         {
-            gameManager.instance.youLose();
+            gamemanager.instance.youLose();
         }
     }
-
-    public void applySlowSpeed(int amount)
+    public void getGunStats(gunStats gun)
     {
-        speed = speed / amount; // takes our currents speed at what its set to and divides the amount 
+        gunList.Add(gun);
+        gunListPos = gunList.Count - 1;
+        changeGun();
     }
 
+    void changeGun()
+    {
+        gunModel.GetComponent<MeshFilter>().mesh = gunList[gunListPos].gunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+    void selectGun()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
+        {
+            gunListPos++;
+            changeGun();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
+        {
+            gunListPos--;
+            changeGun();
+        }
+    }
     public void removeSlowSpeed(int amount)
     {
-        speed = speed * amount; // takes our current (slow) speed and adds the 'amount' back to it
+        speed += amount;
+    }
+    public void applySlowSpeed(int amount)
+    {
+        speed -= amount;
     }
 
     public void heal(int amount) // for health kits 

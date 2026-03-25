@@ -40,8 +40,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [SerializeField] int roamDistance;
 
-    //[Header("Manual Enemy")]
-    [SerializeField] private bool isManualEnemy = true;
+   
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -76,17 +75,13 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         colorOrig = model.material.color;
 
-       // gameManager.instance.updateGameGoal(1);
+        //gamemanager.instance.updateGameGoal(1);
 
         startingPos = transform.position;
 
         stoppingDistOrig = agent.stoppingDistance;
 
-        if (isManualEnemy && !counted)
-        {
-            gameManager.instance.updateGameGoal(1);
-            counted = true;
-        }
+        
     }
 
     // Update is called once per frame
@@ -134,7 +129,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     bool canSeePlayer()
     {
-        playerDir = gameManager.instance.player.transform.position - transform.position;
+        playerDir = gamemanager.instance.player.transform.position - transform.position;
 
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
@@ -146,7 +141,7 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer <= FOV)
             {
-                agent.SetDestination(gameManager.instance.player.transform.position);
+                agent.SetDestination(gamemanager.instance.player.transform.position);
 
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
@@ -225,7 +220,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
             if (counted)
             {
-                gameManager.instance.updateGameGoal(-1);
+                gamemanager.instance.updateGameGoal(-1);
                 counted = false;
             }
                
