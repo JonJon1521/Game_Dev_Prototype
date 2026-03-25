@@ -254,7 +254,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         isDodging = false;
     }
 
-    public void TakeDamage(int damage)
+    public void takeDamage(int damage)
     {
         HP -= damage;
         updatePlayerUI();
