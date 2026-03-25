@@ -220,16 +220,15 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         if (aud != null && gun.shootSound.Length > 0)
             aud.PlayOneShot(gun.shootSound[Random.Range(0, gun.shootSound.Length)], gun.shootSoundVol);
 
-        // Raycast to check if we hit something
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, gun.shootDist, ~ignoreLayer))
         {
-            // Spawn hit effect only if we hit
+            // Spawn hit effect ONLY when hitting something
             if (gun.hitEffect != null)
             {
                 ParticleSystem effect = Instantiate(gun.hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 effect.Play();
-                Destroy(effect.gameObject, 2f);
+                Destroy(effect.gameObject, 0.5f);
             }
 
             // Deal damage if target implements IDamage
