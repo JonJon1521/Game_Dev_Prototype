@@ -261,17 +261,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
     }
 
-    public void takeDamage(int amount)
-    {
-        HP -= amount;
-
-        gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
-
-        if (HP <= 0)
-        {
-            gamemanager.instance.youLose();
-        }
-    }
+    
     public void getGunStats(gunStats gun)
     {
         gunList.Add(gun);
