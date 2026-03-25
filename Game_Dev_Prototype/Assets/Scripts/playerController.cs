@@ -308,11 +308,11 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     }
     public void removeSlowSpeed(int amount)
     {
-        speed += amount;
+        speed *= amount;
     }
     public void applySlowSpeed(int amount)
     {
-        speed -= amount;
+        speed /= amount;
     }
 
     public void heal(int amount) // for health kits 
