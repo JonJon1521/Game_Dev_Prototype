@@ -182,7 +182,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
             }
 
             Debug.Log(hit.collider.name);
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
+            IDamage dmg = hit.collider.GetComponentInParent<IDamage>();
             if (dmg != null)
             {
                 dmg.takeDamage(gunList[gunListPos].shootDamage);
