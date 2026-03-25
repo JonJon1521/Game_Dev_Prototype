@@ -10,6 +10,8 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     [Header("Stats")]
     [Range(1, 100)][SerializeField] int HP;
     [Range(1, 10)][SerializeField] int speed;
@@ -18,30 +20,45 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     [Range(1, 4)][SerializeField] int jumptimesMax;
     [Range(15, 50)][SerializeField] int gravity;
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     [Header("Dodge Settings")]
     [SerializeField] float dodgeDistance = 3f;
     [SerializeField] float dodgeSpeed = 8f;
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     [Header("Guns")]
+
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
+
     [SerializeField] GameObject gunModel;
 
-    [Header("Audio")]
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    [Header("~~~~~~~ Audio ~~~~~~~~")]
+
     [SerializeField] AudioSource aud;
+
     [SerializeField] AudioClip[] audJump;
+
     [SerializeField] float audJumpVol;
-    [SerializeField] AudioClip[] audStep;
-    [SerializeField] float audStepVol;
+
     [SerializeField] AudioClip[] audHurt;
+
     [SerializeField] float audHurtVol;
 
+    [SerializeField] AudioClip[] audStep;
+
+    [SerializeField] float audStepVol;
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     int jumpCount;
     int HPOriginal;
     int gunListPos;
 
-
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     float shootTimer;
 
@@ -51,6 +68,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     Vector3 moveDir;
     Vector3 playerVel;
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     bool isDodging = false;
 
@@ -165,6 +183,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     void shoot()
     {
+        
         shootTimer = 0;
 
         gunList[gunListPos].ammoCur--;
@@ -294,6 +313,20 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     public void applySlowSpeed(int amount)
     {
         speed -= amount;
+    }
+
+    public void heal(int amount) // for health kits 
+    {
+        HP += amount; // we want to add the amount to our health
+
+        if(HP > HPOriginal) // keeps the HP from going over the original hp
+        {
+            HP = HPOriginal; // then we want our HP to be equal to our Original HP
+        }
+
+        gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal; // have to update the HP bar 
+
+        Debug.Log("Healed! HP:" + HP); // log the current HP to the consol for testing
     }
 
 }
