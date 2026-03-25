@@ -122,6 +122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 542090948552766621}
+  - component: {fileID: 6206960739676761040}
   - component: {fileID: 3885102957425264479}
   m_Layer: 0
   m_Name: Capsule (3)
@@ -146,6 +147,18 @@ Transform:
   - {fileID: 344215532584436748}
   m_Father: {fileID: 7740734220411607532}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6206960739676761040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970532147177815184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19755633006bff4b8eaf9bade9918a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
 --- !u!136 &3885102957425264479
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -439,6 +452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7377548526791618938}
+  - component: {fileID: 1382988210062066872}
   - component: {fileID: 7851763868803639406}
   m_Layer: 0
   m_Name: Capsule (1)
@@ -463,6 +477,18 @@ Transform:
   - {fileID: 2813947216198033474}
   m_Father: {fileID: 7740734220411607532}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1382988210062066872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4415985290487831233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19755633006bff4b8eaf9bade9918a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
 --- !u!136 &7851763868803639406
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -495,6 +521,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6145490269194870506}
+  - component: {fileID: 178139387404855680}
   - component: {fileID: 8825925881180634722}
   m_Layer: 0
   m_Name: Capsule
@@ -519,6 +546,18 @@ Transform:
   - {fileID: 6855425512273520902}
   m_Father: {fileID: 7740734220411607532}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &178139387404855680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6249789228852197313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19755633006bff4b8eaf9bade9918a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
 --- !u!136 &8825925881180634722
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -664,6 +703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 277726422669325209}
+  - component: {fileID: 6374486304811946658}
   - component: {fileID: 1921886145821001523}
   m_Layer: 0
   m_Name: Capsule (2)
@@ -688,6 +728,18 @@ Transform:
   - {fileID: 9216367222721283000}
   m_Father: {fileID: 7740734220411607532}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6374486304811946658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7938010860360208261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19755633006bff4b8eaf9bade9918a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
 --- !u!136 &1921886145821001523
 CapsuleCollider:
   m_ObjectHideFlags: 0
