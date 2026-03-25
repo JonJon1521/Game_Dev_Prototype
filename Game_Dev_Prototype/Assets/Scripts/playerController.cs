@@ -208,30 +208,35 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     void shoot()
     {
-        if (gunList.Count == 0 || gunAmmoCur[gunListPos] <= 0) return;
+        if (gunList.Count == 0) return;
 
         gunStats gun = gunList[gunListPos];
 
+        // If still empty after reload, cannot shoot
+        if (gunAmmoCur[gunListPos] <= 0) return;
+
         shootTimer = 0;
+
+        // Fire the shot
         gunAmmoCur[gunListPos]--;
-        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gun.ammoMax);
+        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
 
-        // Play gun sound
-        if (aud != null && gun.shootSound.Length > 0)
-            aud.PlayOneShot(gun.shootSound[Random.Range(0, gun.shootSound.Length)], gun.shootSoundVol);
+        // Play shooting sound
+        aud.PlayOneShot(gun.shootSound[Random.Range(0, gun.shootSound.Length)], gun.shootSoundVol);
 
+        // Raycast
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, gun.shootDist, ~ignoreLayer))
         {
-            // Spawn hit effect ONLY when hitting something
+            // Spawn hit effect (appears at hit point)
             if (gun.hitEffect != null)
             {
                 ParticleSystem effect = Instantiate(gun.hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 effect.Play();
-                Destroy(effect.gameObject, 0.5f);
+                Destroy(effect.gameObject, 2f);
             }
 
-            // Deal damage if target implements IDamage
+            // Apply damage
             IDamage dmg = hit.collider.GetComponentInParent<IDamage>();
             if (dmg != null)
                 dmg.takeDamage(gun.shootDamage);
