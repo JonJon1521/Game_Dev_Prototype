@@ -11,6 +11,8 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     [Header("Stats")]
     [Range(1, 100)][SerializeField] int HP;
     [Range(1, 10)][SerializeField] int speed;
@@ -19,14 +21,19 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     [Range(1, 4)][SerializeField] int jumptimesMax;
     [Range(15, 50)][SerializeField] int gravity;
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     [Header("Dodge Settings")]
     [SerializeField] float dodgeDistance = 3f;
     [SerializeField] float dodgeSpeed = 8f;
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     [Header("Guns")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
     [SerializeField] GameObject gunModel;
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     [Header("Audio")]
     [SerializeField] AudioSource aud;
@@ -37,21 +44,27 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] AudioClip[] audHurt;
     [SerializeField] float audHurtVol;
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     int jumpCount;
     int HPOriginal;
     int gunListPos;
 
-
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     float shootTimer;
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     bool isPlayingStep;
     bool isSprinting;
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     Vector3 moveDir;
     Vector3 playerVel;
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     bool isDodging = false;
 
@@ -302,5 +315,17 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         HP = Mathf.Clamp(HP, 0, HPOriginal);
         updatePlayerUI();
     }  
+
+    public void refill(int amount)
+    {
+        if (gunList.Count > 0)
+        {
+            gunList[gunListPos].ammoCur += amount;
+
+            gunList[gunListPos].ammoCur = Mathf.Clamp(gunList[gunListPos].ammoCur, 0, gunList[gunListPos].ammoMax);
+
+            updatePlayerUI();
+        }
+    }
 
 }

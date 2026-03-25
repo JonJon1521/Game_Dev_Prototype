@@ -70,14 +70,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 017113728d297214eab7614b492c9f69, type: 3}
   - {fileID: 8300000, guid: e12ac7e4b0a0f354bbcb3d9c236a9f42, type: 3}
   audJumpVol: 0.5
-  audHurt:
-  - {fileID: 8300000, guid: fdcd15b2adb33454c94e3716e874bcb9, type: 3}
-  - {fileID: 8300000, guid: 81ee2f73edae2e94c9e8673d0d263f19, type: 3}
-  - {fileID: 8300000, guid: e0ece09316e39144a8b1b2d2bdc78f62, type: 3}
-  - {fileID: 8300000, guid: 94f3a84acaa912e49bd233f119a00467, type: 3}
-  - {fileID: 8300000, guid: fb3418177fa8016499904a0acca88dd4, type: 3}
-  - {fileID: 8300000, guid: 8c7856dc3cb190d40999e41cc677b803, type: 3}
-  audHurtVol: 0.3
   audStep:
   - {fileID: 8300000, guid: 359edd25c0907fc47b89606751e361cc, type: 3}
   - {fileID: 8300000, guid: 9c7c8fe2abd86254eb7845286c7ce5e3, type: 3}
@@ -89,6 +81,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fb47acf2c564bf148a926d3b2bf3617d, type: 3}
   - {fileID: 8300000, guid: fb47acf2c564bf148a926d3b2bf3617d, type: 3}
   audStepVol: 0.4
+  audHurt:
+  - {fileID: 8300000, guid: fdcd15b2adb33454c94e3716e874bcb9, type: 3}
+  - {fileID: 8300000, guid: 81ee2f73edae2e94c9e8673d0d263f19, type: 3}
+  - {fileID: 8300000, guid: e0ece09316e39144a8b1b2d2bdc78f62, type: 3}
+  - {fileID: 8300000, guid: 94f3a84acaa912e49bd233f119a00467, type: 3}
+  - {fileID: 8300000, guid: fb3418177fa8016499904a0acca88dd4, type: 3}
+  - {fileID: 8300000, guid: 8c7856dc3cb190d40999e41cc677b803, type: 3}
+  audHurtVol: 0.3
 --- !u!143 &-6308406431859260662
 CharacterController:
   m_ObjectHideFlags: 0
@@ -631,9 +631,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 259a471e0e968b64b85a7b4b8fed139e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::cameraController
-  sens: 0
-  lockVertMin: 0
-  lockVertMax: 0
+  sens: 300
+  lockVertMin: -90
+  lockVertMax: 90
   invertY: 0
   player: {fileID: 0}
 --- !u!1 &6541400086939560602
