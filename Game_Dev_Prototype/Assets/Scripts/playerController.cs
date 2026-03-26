@@ -395,16 +395,16 @@ public class playerController : MonoBehaviour, IDamage, IPickup
             if (gunList[gunListPos].reloadSound != null)
                 aud.PlayOneShot(gunList[gunListPos].reloadSound, gunList[gunListPos].reloadSoundVol);
         }
-    }
+    } 
     public void AddAmmo(int amount)
     {
         if (gunList.Count == 0) return;
 
-        gunAmmoCur[gunListPos] += amount;
+        gunAmmoMaxSession[gunListPos] += amount; // add to the reserved (pockets) , not the current ammo
 
         // Clamp to session max
         if (gunAmmoCur[gunListPos] > gunAmmoMaxSession[gunListPos])
-            gunAmmoCur[gunListPos] = gunAmmoMaxSession[gunListPos];
+         gunAmmoCur[gunListPos] = gunAmmoMaxSession[gunListPos];
 
         gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
     }
