@@ -14,10 +14,11 @@ public class ammoPickup : MonoBehaviour
 
             if (playerScript != null)
             {
-                playerScript.refill(ammoAmount);
+                playerScript.AddAmmo(ammoAmount);
 
                 Destroy(gameObject);
             }
         }
     }
+
 }

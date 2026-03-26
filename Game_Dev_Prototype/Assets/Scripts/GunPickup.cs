@@ -3,7 +3,8 @@ using UnityEngine;
 public class GunPickup : MonoBehaviour
 {
     [SerializeField] gunStats gun;
-
+  
+   
     private void OnTriggerEnter(Collider other)
     {
         IPickup pick = other.GetComponent<IPickup>();

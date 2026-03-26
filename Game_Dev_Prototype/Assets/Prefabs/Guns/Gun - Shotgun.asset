@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc6c6c78554c1d41ace7f07b597d40c, type: 3}
   m_Name: Gun - Shotgun
   m_EditorClassIdentifier: Assembly-CSharp::gunStats
+  reloadSound: {fileID: 8300000, guid: b4ac17e73b4e208409433d62f65efa95, type: 3}
+  reloadSoundVol: 1
   gunModel: {fileID: 5571641588984482722, guid: c303a18f1cbdd4156b139b9e5b35d6a9, type: 3}
   shootDamage: 10
   shootDist: 25
   shootRate: 1
-  ammoCur: 16
+  totalAmmo: 0
+  ammoCur: 20
   ammoMax: 20
-  hitEffect: {fileID: 457623119556104996, guid: 688ac795a5454f746879d4c7bca6ac7e, type: 3}
+  hitEffect: {fileID: 7480972026424242384, guid: d9e4caed490b104408a94bbecebb4f83, type: 3}
   shootSound:
   - {fileID: 8300000, guid: c35c7917fadcda448b345b9e8dd449b1, type: 3}
   shootSoundVol: 0.5

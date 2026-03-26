@@ -68,20 +68,16 @@ public class enemyAI : MonoBehaviour, IDamage
     Vector3 startingPos;
 
 
-   
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         colorOrig = model.material.color;
-
-        //gamemanager.instance.updateGameGoal(1);
-
         startingPos = transform.position;
-
         stoppingDistOrig = agent.stoppingDistance;
 
-        
+        counted = true; // make it count for goal decrement
     }
 
     // Update is called once per frame
@@ -129,6 +125,8 @@ public class enemyAI : MonoBehaviour, IDamage
 
     bool canSeePlayer()
     {
+        if (gamemanager.instance == null || gamemanager.instance.player == null) return false;
+
         playerDir = gamemanager.instance.player.transform.position - transform.position;
 
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);

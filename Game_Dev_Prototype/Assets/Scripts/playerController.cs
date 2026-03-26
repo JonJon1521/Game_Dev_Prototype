@@ -68,6 +68,15 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     bool isDodging = false;
 
+    public int CurrentGunPos => gunListPos;
+
+
+    List<int> gunAmmoCur = new List<int>();
+    List<int> gunTotalAmmo = new List<int>();
+    List<int> gunAmmoMaxOriginal = new List<int>();
+    List<int> gunAmmoCurOriginal = new List<int>();
+    List<int> gunAmmoMaxSession = new List<int>();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -83,9 +92,16 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     void Update()
     {
         if (gamemanager.instance != null && !gamemanager.instance.isPaused)
+        {
             movement();
-        sprint();
-        HandleDodgeInput();
+            sprint();
+            HandleDodgeInput();
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                reload();
+            }
+        }
     }
     IEnumerator playStep()
     {
@@ -106,16 +122,29 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         }
 
         isPlayingStep = false;
+
+
     }
+
     public void spawnPlayer()
     {
         controller.transform.position = gamemanager.instance.playerSpawnPos.transform.position;
         Physics.SyncTransforms();
+
         HP = HPOriginal;
         updatePlayerUI();
 
-    }
+        // Reset all ammo and session max
+        for (int i = 0; i < gunList.Count; i++)
+        {
+            gunAmmoCur[i] = gunAmmoCurOriginal[i];
+            gunAmmoMaxSession[i] = gunAmmoMaxOriginal[i];
+        }
 
+        // Update UI for current gun
+        if (gunList.Count > 0)
+            gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
+    }
 
     void movement()
     {
@@ -136,11 +165,11 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         playerVel.y -= gravity * Time.deltaTime;
 
 
-        if (Input.GetButtonDown("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= gunList[gunListPos].shootRate)
+        if (Input.GetButtonDown("Fire1") && gunList.Count > 0 && gunAmmoCur[gunListPos] > 0 && shootTimer >= gunList[gunListPos].shootRate)
         {
             shoot();
         }
-
+      
         selectGun();
 
         if (aud != null && audStep.Length > 0 && moveDir.normalized.magnitude > 0.3f && !isPlayingStep)
@@ -179,30 +208,45 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     void shoot()
     {
+        if (gunList.Count == 0) return;
+
+        gunStats gun = gunList[gunListPos];
+
+        // If still empty after reload, cannot shoot
+        if (gunAmmoCur[gunListPos] <= 0) return;
+
         shootTimer = 0;
 
-        gunList[gunListPos].ammoCur--;
-        aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
+        // Fire the shot
+        gunAmmoCur[gunListPos]--;
+        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
+
+        // Play shooting sound
+        aud.PlayOneShot(gun.shootSound[Random.Range(0, gun.shootSound.Length)], gun.shootSoundVol);
+
+        // Raycast start slightly in front of camera to avoid hitting gun
+        Vector3 rayOrigin = Camera.main.transform.position + Camera.main.transform.forward * 0.5f;
+
+        // Ignore Gun Camera layer (includes gun model) and Player
+        int layerMask = ~LayerMask.GetMask("Gun Camera", "Player");
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, gunList[gunListPos].shootDist, ~ignoreLayer))
+        if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit, gun.shootDist, layerMask))
         {
-            if (gunList[gunListPos].hitEffect != null)
+            // Spawn hit effect (appears at hit point)
+            if (gun.hitEffect != null)
             {
-                ParticleSystem effect = Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                ParticleSystem effect = Instantiate(gun.hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 effect.Play();
-                Destroy(effect.gameObject, 2f); 
+                Destroy(effect.gameObject, 2f);
             }
 
-            Debug.Log(hit.collider.name);
+            // Apply damage
             IDamage dmg = hit.collider.GetComponentInParent<IDamage>();
             if (dmg != null)
-            {
-                dmg.takeDamage(gunList[gunListPos].shootDamage);
-            }
+                dmg.takeDamage(gun.shootDamage);
         }
     }
-
 
     void HandleDodgeInput()
     {
@@ -275,18 +319,30 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
     }
 
-   
+
     public void getGunStats(gunStats gun)
     {
         gunList.Add(gun);
+        gunAmmoCur.Add(gun.ammoCur);
+        gunTotalAmmo.Add(gun.totalAmmo);
+
+        // Store originals
+        gunAmmoCurOriginal.Add(gun.ammoCur);
+        gunAmmoMaxOriginal.Add(gun.ammoMax);
+
+        // Session max for depletion
+        gunAmmoMaxSession.Add(gun.ammoMax);
+
         gunListPos = gunList.Count - 1;
         changeGun();
+        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
     }
 
     void changeGun()
     {
         gunModel.GetComponent<MeshFilter>().mesh = gunList[gunListPos].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunList[gunListPos].ammoMax);
     }
     void selectGun()
     {
@@ -314,18 +370,42 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         HP += amount;
         HP = Mathf.Clamp(HP, 0, HPOriginal);
         updatePlayerUI();
+
     }  
 
-    public void refill(int amount)
+    public void reload()
     {
-        if (gunList.Count > 0)
-        { 
-            gunList[gunListPos].ammoCur += amount;
+        if (gunList.Count == 0 || gunListPos < 0 || gunListPos >= gunList.Count)
+            return;
 
-            gunList[gunListPos].ammoCur = Mathf.Clamp(gunList[gunListPos].ammoCur, 0, gunList[gunListPos].ammoMax);
+        // How much ammo we can add
+        int missingAmmo = gunAmmoCurOriginal[gunListPos] - gunAmmoCur[gunListPos];
 
-            updatePlayerUI();
+        // Make sure session max is enough
+        if (missingAmmo > gunAmmoMaxSession[gunListPos])
+            missingAmmo = gunAmmoMaxSession[gunListPos];
+
+        if (missingAmmo > 0)
+        {
+            gunAmmoCur[gunListPos] += missingAmmo;
+            gunAmmoMaxSession[gunListPos] -= missingAmmo;
+
+            gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
+
+            if (gunList[gunListPos].reloadSound != null)
+                aud.PlayOneShot(gunList[gunListPos].reloadSound, gunList[gunListPos].reloadSoundVol);
         }
     }
+    public void AddAmmo(int amount)
+    {
+        if (gunList.Count == 0) return;
 
+        gunAmmoCur[gunListPos] += amount;
+
+        // Clamp to session max
+        if (gunAmmoCur[gunListPos] > gunAmmoMaxSession[gunListPos])
+            gunAmmoCur[gunListPos] = gunAmmoMaxSession[gunListPos];
+
+        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
+    }
 }

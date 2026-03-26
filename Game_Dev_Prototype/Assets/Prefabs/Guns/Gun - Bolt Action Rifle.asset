@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc6c6c78554c1d41ace7f07b597d40c, type: 3}
   m_Name: Gun - Bolt Action Rifle
   m_EditorClassIdentifier: Assembly-CSharp::gunStats
+  reloadSound: {fileID: 8300000, guid: b4ac17e73b4e208409433d62f65efa95, type: 3}
+  reloadSoundVol: 1
   gunModel: {fileID: 4698201593948852689, guid: 185ce04d44da342739f0bef843698e6c, type: 3}
   shootDamage: 6
   shootDist: 100
   shootRate: 1
+  totalAmmo: 0
   ammoCur: 36
   ammoMax: 40
-  hitEffect: {fileID: 457623119556104996, guid: 688ac795a5454f746879d4c7bca6ac7e, type: 3}
+  hitEffect: {fileID: 7480972026424242384, guid: d9e4caed490b104408a94bbecebb4f83, type: 3}
   shootSound:
   - {fileID: 8300000, guid: 52d857e1075b45444ad3ccd01af6b0e0, type: 3}
   shootSoundVol: 0.5
