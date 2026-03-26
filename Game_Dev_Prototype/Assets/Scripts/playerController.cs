@@ -319,7 +319,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     public void refill(int amount)
     {
         if (gunList.Count > 0)
-        {
+        { 
             gunList[gunListPos].ammoCur += amount;
 
             gunList[gunListPos].ammoCur = Mathf.Clamp(gunList[gunListPos].ammoCur, 0, gunList[gunListPos].ammoMax);
