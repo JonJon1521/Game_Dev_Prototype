@@ -201,7 +201,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.5, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &4285868690055780654
 BoxCollider:
@@ -236,10 +236,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d545c8947567c142b0a537aac5385c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::damage
-  type: 2
+  type: 1
   rigid: {fileID: 3900337891156595266}
-  damageAmount: 10
-  rateOfDamage: 5
+  damageAmount: 2
+  rateOfDamage: 1
   speed: 4
   destroyTime: 0
   hit: {fileID: 0}
