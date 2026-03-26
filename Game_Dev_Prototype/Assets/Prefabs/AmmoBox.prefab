@@ -207,7 +207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9037408266082842330}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000015362108, y: 0.7113004, z: 0.000000015545963, w: 0.7028882}
+  m_LocalRotation: {x: 0, y: 0.7113026, z: 0, w: 0.702886}
   m_LocalPosition: {x: 5.479867, y: 1.09, z: -9.629864}
   m_LocalScale: {x: 0.001, y: 0.001, z: 0.001}
   m_ConstrainProportionsScale: 0
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d06e67e985a62244970798575a1d6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ammoPickup
-  ammoAmount: 1
+  ammoAmount: 20
   playerScript: {fileID: 0}
 --- !u!65 &3480497115631497024
 BoxCollider:
