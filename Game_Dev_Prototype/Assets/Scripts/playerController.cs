@@ -7,6 +7,12 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour, IDamage, IPickup
 {
+
+    [Header("Spellcasting")]
+    [SerializeField] private List<GameObject> spellLoadout = new List<GameObject>();
+    [SerializeField] private Transform castPoint;
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     [Header("Compontents")]
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
@@ -69,6 +75,8 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     bool isDodging = false;
 
     public int CurrentGunPos => gunListPos;
+    private GameObject[] activeSpells;
+
 
 
     List<int> gunAmmoCur = new List<int>();
@@ -101,6 +109,12 @@ public class playerController : MonoBehaviour, IDamage, IPickup
             {
                 reload();
             }
+            if (Input.GetKeyDown(KeyCode.F))
+                CastSpell(0);
+
+            if (Input.GetKeyDown(KeyCode.G))
+                CastSpell(1);
+
         }
     }
     IEnumerator playStep()
@@ -408,4 +422,38 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
         gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
     }
+
+    public void EquipSpell(int slotIndex)
+    {
+        if (slotIndex < 0 || slotIndex >= spellLoadout.Count) return;
+
+        GameObject spellPrefab = spellLoadout[slotIndex];
+        if (spellPrefab == null) return;
+
+        // remove old spell
+        if (activeSpells[slotIndex] != null)
+            Destroy(activeSpells[slotIndex]);
+
+        // spawn new spell
+        activeSpells[slotIndex] = Instantiate(
+            spellPrefab,
+            transform.position,
+            Quaternion.identity,
+            transform
+        );
+    }
+
+    void CastSpell(int index)
+    {
+        if (index < 0 || index >= spellLoadout.Count) return;
+        if (spellLoadout[index] == null) return;
+        if (castPoint == null) return;
+
+        Instantiate(
+            spellLoadout[index],
+            castPoint.position,
+            castPoint.rotation
+        );
+    }
+
 }
