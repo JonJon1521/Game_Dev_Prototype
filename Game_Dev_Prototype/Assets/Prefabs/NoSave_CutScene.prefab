@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &436832392449190427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4542933836631018836}
+  - component: {fileID: 4291094458123793268}
+  m_Layer: 0
+  m_Name: NoSave_CutScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4542933836631018836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436832392449190427}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -695.4603, y: 0, z: 272.1145}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &4291094458123793268
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436832392449190427}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 1e0dfe4821bdebf4391cb2e92e1d6d42, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -2658000821776376857, guid: 1e0dfe4821bdebf4391cb2e92e1d6d42, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4125084864969999927, guid: 1e0dfe4821bdebf4391cb2e92e1d6d42, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7808684732520477046, guid: 1e0dfe4821bdebf4391cb2e92e1d6d42, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -495703155653408746, guid: 1e0dfe4821bdebf4391cb2e92e1d6d42, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5054995103177549977, guid: 1e0dfe4821bdebf4391cb2e92e1d6d42, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References: []

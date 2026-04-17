@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1476692351687517139}
   - component: {fileID: 6624234900178237370}
   - component: {fileID: 2233980036630360323}
+  - component: {fileID: 2489491156576474834}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -31,8 +32,8 @@ Transform:
   m_GameObject: {fileID: 638851036564823962}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.34783, y: 1.5, z: -8.85177}
-  m_LocalScale: {x: 2.0217671, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: -691.02, y: 1, z: 268.825}
+  m_LocalScale: {x: 1.3551326, y: 1.265145, z: 1.34355}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 343685599550447969}
@@ -296,6 +297,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &2489491156576474834
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638851036564823962}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1007362591143408797
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +363,7 @@ GameObject:
   - component: {fileID: 3617430559590255331}
   - component: {fileID: 200762178547408781}
   - component: {fileID: 1868165394404884581}
+  - component: {fileID: 6721605516422613323}
   m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -355,8 +379,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371340690765339826}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.46, z: -0.01}
+  m_LocalRotation: {x: 0.35841128, y: 0.03329562, z: -0.012803588, w: 0.932882}
+  m_LocalPosition: {x: -2.3914433, y: 4.4659758, z: -3.5133545}
   m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -398,7 +422,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -486,6 +510,38 @@ MonoBehaviour:
   lockVertMax: 90
   invertY: 0
   player: {fileID: 0}
+--- !u!114 &6721605516422613323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371340690765339826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBrain
+  ShowDebugText: 0
+  ShowCameraFrustum: 1
+  IgnoreTimeScale: 0
+  WorldUpOverride: {fileID: 0}
+  ChannelMask: -1
+  UpdateMethod: 2
+  BlendUpdateMethod: 1
+  LensModeOverride:
+    Enabled: 0
+    DefaultMode: 2
+  DefaultBlend:
+    Style: 1
+    Time: 2
+    CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  CustomBlends: {fileID: 0}
 --- !u!1 &2813957649540688457
 GameObject:
   m_ObjectHideFlags: 0

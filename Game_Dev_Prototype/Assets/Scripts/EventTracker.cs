@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public class EventTracker : MonoBehaviour
+[CreateAssetMenu(fileName = "WorldState", menuName = "Game/Event Tracker")]
+
+public class EventTracker : ScriptableObject
 {
 
     public bool catSaved;

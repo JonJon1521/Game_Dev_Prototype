@@ -74,6 +74,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     bool isDodging = false;
 
+    public Transform cameratransform;
     public int CurrentGunPos => gunListPos;
     private GameObject[] activeSpells;
 
@@ -170,6 +171,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
             jumpCount = 0;
         }
 
+      
         moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
         controller.Move(moveDir * speed * Time.deltaTime);
 
