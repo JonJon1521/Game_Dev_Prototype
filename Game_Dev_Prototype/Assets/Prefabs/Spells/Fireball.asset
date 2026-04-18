@@ -15,5 +15,5 @@ MonoBehaviour:
   Spell: {fileID: 4677377172591258091, guid: 499901e35b3f96d4f9bd15c1cab456ce, type: 3}
   shootDamage: 6
   shootDist: 40
-  shootRate: 5
+  shootRate: 20
   hitEffect: {fileID: 0}

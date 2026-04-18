@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour, IDamage, IPickup
 {
+    
 
     [Header("Spellcasting")]
     [SerializeField] private List<GameObject> spellLoadout = new List<GameObject>();
@@ -93,7 +94,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         spawnPlayer();
         if (gunList.Count > 0)
             gunListPos = 0;
-
+        gamemanager.instance.UpdateSpellUI(spellLoadout);
 
     }
 
@@ -443,6 +444,8 @@ public class playerController : MonoBehaviour, IDamage, IPickup
             Quaternion.identity,
             transform
         );
+        if (gamemanager.instance != null)
+            gamemanager.instance.UpdateSpellUI(spellLoadout);
     }
 
     void CastSpell(int index)
@@ -457,5 +460,11 @@ public class playerController : MonoBehaviour, IDamage, IPickup
             castPoint.rotation
         );
     }
-
+    void UpdateSpellUI()
+    {
+        if (gamemanager.instance != null)
+        {
+            gamemanager.instance.UpdateSpellUI(spellLoadout);
+        }
+    }
 }
