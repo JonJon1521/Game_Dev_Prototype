@@ -6,7 +6,7 @@ public class Collectible : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        gamemanager.instance.AddCollectible();
+        gamemanager.instance.updateGameGoal(-1);
         Destroy(gameObject);
     }
 }

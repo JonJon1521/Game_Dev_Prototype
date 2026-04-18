@@ -24,6 +24,7 @@ public class gamemanager : MonoBehaviour
     public GameObject checkpointPopup;
     public GameObject damagePlayerFlash;
     public bool isPaused;
+    bool goalUnlocked = false;
 
     private float timeScaleOriginal;
 
@@ -44,6 +45,10 @@ public class gamemanager : MonoBehaviour
         playerScript = player.GetComponent<playerController>();
 
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
+        gameGoalCount =
+        Object.FindObjectsByType<Collectible>(FindObjectsSortMode.None).Length;
+
+        gameGoalCountText.text = gameGoalCount.ToString("F0");
     }
 
     // Update is called once per frame
@@ -91,12 +96,12 @@ public class gamemanager : MonoBehaviour
 
         if (gameGoalCount <= 0)
         {
-            statePaused();
-            menuActive = menuWin;
-            menuWin.SetActive(true);
-
+            // unlock exit instead of instantly winning
+            goalUnlocked = true;
         }
     }
+
+
 
     public void youLose()
     {
@@ -129,7 +134,12 @@ public class gamemanager : MonoBehaviour
 
     public bool IsGoalUnlocked()
     {
-        return collectedCount >= requiredCollectibles;
+        return goalUnlocked;
     }
-
+    public void ShowWinMenu()
+    {
+        statePaused();
+        menuActive = menuWin;
+        menuWin.SetActive(true);
+    }
 }

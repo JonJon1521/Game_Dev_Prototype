@@ -3,6 +3,7 @@ using UnityEngine;
 public class Endgoal : MonoBehaviour
 {
     int requiredCollectibles;
+    int amount;
     bool playerInRange;
 
     void Start()
@@ -21,12 +22,11 @@ public class Endgoal : MonoBehaviour
         {
             if (gamemanager.instance.IsGoalUnlocked())
             {
-                Debug.Log("You Win! Exit Used");
-                // put win logic here
+                gamemanager.instance.ShowWinMenu();
             }
             else
             {
-                Debug.Log("Exit Locked - Collect everything first");
+                Debug.Log("Exit Locked");
             }
         }
     }
@@ -42,4 +42,5 @@ public class Endgoal : MonoBehaviour
         if (other.CompareTag("Player"))
             playerInRange = false;
     }
+
 }
