@@ -94,7 +94,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         if (gunList.Count > 0)
             gunListPos = 0;
 
-
+        gamemanager.instance.UpdateSpellUI(spellLoadout);
     }
 
     // Update is called once per frame
@@ -443,6 +443,8 @@ public class playerController : MonoBehaviour, IDamage, IPickup
             Quaternion.identity,
             transform
         );
+        if (gamemanager.instance != null)
+            gamemanager.instance.UpdateSpellUI(spellLoadout);
     }
 
     void CastSpell(int index)
@@ -456,6 +458,13 @@ public class playerController : MonoBehaviour, IDamage, IPickup
             castPoint.position,
             castPoint.rotation
         );
+    }
+    void UpdateSpellUI()
+    {
+        if (gamemanager.instance != null)
+        {
+            gamemanager.instance.UpdateSpellUI(spellLoadout);
+        }
     }
 
 }
