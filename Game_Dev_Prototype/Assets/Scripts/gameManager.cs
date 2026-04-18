@@ -1,5 +1,6 @@
-using UnityEngine;
+using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -13,6 +14,8 @@ public class gamemanager : MonoBehaviour
     [SerializeField] TMP_Text gameGoalCountText;
     [SerializeField] TMP_Text ammoCurrentText;
     [SerializeField] TMP_Text ammoMaxText;
+    [SerializeField] TextMeshProUGUI spell1Text;
+    [SerializeField] TextMeshProUGUI spell2Text;
 
     public Image playerHPBar;
     public GameObject player;
@@ -27,7 +30,10 @@ public class gamemanager : MonoBehaviour
     private int gameGoalCount;
 
     public static gamemanager instance;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    int requiredCollectibles;
+    int collectedCount;
+   
     void Awake()
     {
         instance = this;
@@ -103,6 +109,27 @@ public class gamemanager : MonoBehaviour
         ammoCurrentText.text = current.ToString();
         ammoMaxText.text = max.ToString();
     }
+    public void UpdateSpellUI(List<GameObject> spellLoadout)
+    {
+        if (spellLoadout.Count > 0 && spellLoadout[0] != null)
+            spell1Text.text = spellLoadout[0].name;
 
+        if (spellLoadout.Count > 1 && spellLoadout[1] != null)
+            spell2Text.text = spellLoadout[1].name;
+    }
+    public void SetRequiredCollectibles(int amount)
+    {
+        requiredCollectibles = amount;
+    }
+
+    public void AddCollectible()
+    {
+        collectedCount++;
+    }
+
+    public bool IsGoalUnlocked()
+    {
+        return collectedCount >= requiredCollectibles;
+    }
 
 }
