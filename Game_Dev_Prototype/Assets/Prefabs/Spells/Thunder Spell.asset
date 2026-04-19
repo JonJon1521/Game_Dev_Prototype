@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Thunder Spell
   m_EditorClassIdentifier: Assembly-CSharp::Spellstats
   Spell: {fileID: 4677377172591258091, guid: e0ed4555114de3e4198ef5018e13cbed, type: 3}
+  manaCost: 7
   shootDamage: 3
   shootDist: 80
   shootRate: 5

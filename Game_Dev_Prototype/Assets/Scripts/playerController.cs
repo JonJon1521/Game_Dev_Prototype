@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+#if UNITY_EDITOR
+using UnityEditor.Experimental.GraphView;
+#endif
 using UnityEngine;
 
 
@@ -10,6 +14,8 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     [Header("Spellcasting")]
     [SerializeField] private List<GameObject> spellLoadout = new List<GameObject>();
+    [SerializeField] private List<Spellstats> spellStats = new List<Spellstats>();
+
     [SerializeField] private Transform castPoint;
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -126,10 +132,10 @@ public class playerController : MonoBehaviour, IDamage, IPickup
             {
                 reload();
             }
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.C))
                 CastSpell(0);
 
-            if (Input.GetKeyDown(KeyCode.G))
+            if (Input.GetKeyDown(KeyCode.V))
                 CastSpell(1);
 
         }
@@ -140,7 +146,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
         if (aud != null && audStep != null && audStep.Length > 0)
         {
-            aud.PlayOneShot(audStep[Random.Range(0, audStep.Length)], audStepVol);
+            aud.PlayOneShot(audStep[UnityEngine.Random.Range(0, audJump.Length)], audStepVol);
         }
 
         if (isSprinting)
@@ -246,7 +252,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         {
             playerVel.y = jumpSpeed;
             jumpCount++;
-            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+            aud.PlayOneShot(audJump[UnityEngine.Random.Range(0, audJump.Length)], audJumpVol);
         }
     }
 
@@ -282,7 +288,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
 
         // Play shooting sound
-        aud.PlayOneShot(gun.shootSound[Random.Range(0, gun.shootSound.Length)], gun.shootSoundVol);
+        aud.PlayOneShot(gun.shootSound[UnityEngine.Random.Range(0, gun.shootSound.Length)], gun.shootSoundVol);
 
         // Raycast start slightly in front of camera to avoid hitting gun
         Vector3 rayOrigin = Camera.main.transform.position + Camera.main.transform.forward * 0.5f;
@@ -357,7 +363,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     {
         HP -= damage;
         updatePlayerUI();
-        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
+        aud.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audHurtVol);
         StartCoroutine(flashDamage());
         if (HP <= 0)
         {
@@ -374,12 +380,11 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
 
 
-    public void updatePlayerUI()
-    {
-        gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
-
-        gamemanager.instance.playerManaBar.fillAmount = (float)Mana / ManaOriginal;
-    }
+   public void updatePlayerUI()
+{
+    gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
+    gamemanager.instance.playerManaBar.fillAmount = (float)Mana / ManaOriginal;
+}
 
 
     public void getGunStats(gunStats gun)
@@ -486,39 +491,43 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         GameObject spellPrefab = spellLoadout[slotIndex];
         if (spellPrefab == null) return;
 
-        // remove old spell
+        if (activeSpells == null || activeSpells.Length != spellLoadout.Count)
+            activeSpells = new GameObject[spellLoadout.Count];
+
         if (activeSpells[slotIndex] != null)
             Destroy(activeSpells[slotIndex]);
 
-        // spawn new spell
         activeSpells[slotIndex] = Instantiate(
             spellPrefab,
             transform.position,
             Quaternion.identity,
             transform
         );
-        if (gamemanager.instance != null)
-            gamemanager.instance.UpdateSpellUI(spellLoadout);
+
+        gamemanager.instance.UpdateSpellUI(spellLoadout);
     }
 
     void CastSpell(int index)
     {
         if (index < 0 || index >= spellLoadout.Count) return;
-        if (spellLoadout[index] == null) return;
+
+        GameObject spellPrefab = spellLoadout[index];
+        if (spellPrefab == null) return;
+
         if (castPoint == null) return;
 
         Instantiate(
-            spellLoadout[index],
+            spellPrefab,
             castPoint.position,
             castPoint.rotation
         );
     }
-    void UpdateSpellUI()
+    public void UpdateSpellUI(List<Spellstats> spells)
     {
         if (gamemanager.instance != null)
         {
             gamemanager.instance.UpdateSpellUI(spellLoadout);
         }
     }
-
+   
 }

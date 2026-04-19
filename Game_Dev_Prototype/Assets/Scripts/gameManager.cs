@@ -117,6 +117,9 @@ public class gamemanager : MonoBehaviour
     }
     public void UpdateSpellUI(List<GameObject> spellLoadout)
     {
+        spell1Text.text = "";
+        spell2Text.text = "";
+
         if (spellLoadout.Count > 0 && spellLoadout[0] != null)
             spell1Text.text = spellLoadout[0].name;
 

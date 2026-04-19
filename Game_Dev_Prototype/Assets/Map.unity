@@ -1452,6 +1452,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8044492075097584765, guid: b9b642dc8ec46d8458ceb38478afc497, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 6f7f14e927434bc4cacb42ce65de72ca, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2988610934754280746, guid: b9b642dc8ec46d8458ceb38478afc497, type: 3}
@@ -8136,6 +8140,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4620335139280802719, guid: e869e19945c1e174180658437a894163, type: 3}
+      propertyPath: Mana
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10207,7 +10215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5493759033437642722, guid: 1b57bbee2bc34f14e90158050fa7c4de, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
