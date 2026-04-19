@@ -17,4 +17,4 @@ MonoBehaviour:
   shootDamage: 3
   shootDist: 80
   shootRate: 5
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 5599749642866688485, guid: 82e217f5d54897347bc827bd837f6147, type: 3}
