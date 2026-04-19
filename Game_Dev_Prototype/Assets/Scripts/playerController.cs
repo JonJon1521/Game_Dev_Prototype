@@ -11,6 +11,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     [Header("Spellcasting")]
     [SerializeField] private List<GameObject> spellLoadout = new List<GameObject>();
     [SerializeField] private Transform castPoint;
+
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     [Header("Compontents")]
@@ -21,6 +22,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     [Header("Stats")]
     [Range(1, 100)][SerializeField] int HP;
+    [Range(1, 100)][SerializeField] int Mana;
     [Range(1, 10)][SerializeField] int speed;
     [Range(2, 6)][SerializeField] int sprintMod;
     [Range(5, 25)][SerializeField] int jumpSpeed;
@@ -50,22 +52,23 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] AudioClip[] audHurt;
     [SerializeField] float audHurtVol;
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~~INTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     int jumpCount;
     int HPOriginal;
+    int ManaOriginal;
     int gunListPos;
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~~FLOATS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     float shootTimer;
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~~BOOLS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     bool isPlayingStep;
     bool isSprinting;
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~~VECTORS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -76,6 +79,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     public Transform cameratransform;
     public int CurrentGunPos => gunListPos;
+
     private GameObject[] activeSpells;
 
 
@@ -90,6 +94,9 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     void Start()
     {
         HPOriginal = HP;
+
+        ManaOriginal = Mana;
+
         spawnPlayer();
 
         // adding these to hide the mouse ~~~~~
@@ -156,6 +163,9 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         Physics.SyncTransforms();
 
         HP = HPOriginal;
+
+        Mana = ManaOriginal;
+
         updatePlayerUI();
 
         // Reset all ammo and session max
@@ -367,6 +377,8 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     public void updatePlayerUI()
     {
         gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
+
+        gamemanager.instance.playerManaBar.fillAmount = (float)Mana / ManaOriginal;
     }
 
 
@@ -422,6 +434,14 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         updatePlayerUI();
 
     }  
+    public void restoreMana(int amount)
+    {
+        Mana += amount;
+
+        Mana = Mathf.Clamp(Mana, 0, ManaOriginal);
+
+        updatePlayerUI();
+    }
 
     public void reload()
     {

@@ -18,6 +18,7 @@ public class gamemanager : MonoBehaviour
     [SerializeField] TextMeshProUGUI spell2Text;
 
     public Image playerHPBar;
+    public Image playerManaBar;
     public GameObject player;
     public playerController playerScript;
     public GameObject playerSpawnPos;

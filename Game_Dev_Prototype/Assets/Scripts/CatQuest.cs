@@ -40,7 +40,7 @@ public class CatQuest : MonoBehaviour
     {
         if (canInteract && Input.GetKeyDown(KeyCode.F))
         {
-            interactPrompt.SetActive(false); // hide the e propmt because we are now talking
+            interactPrompt.SetActive(false); // hide the f propmt because we are now talking
 
             choiceUI.SetActive(true); // turn on the UI buttons on the screen
 
