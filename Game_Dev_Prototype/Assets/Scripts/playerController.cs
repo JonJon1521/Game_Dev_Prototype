@@ -91,6 +91,15 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     {
         HPOriginal = HP;
         spawnPlayer();
+
+        // adding these to hide the mouse ~~~~~
+
+        Cursor.lockState = CursorLockMode.Locked;
+
+        Cursor.visible = false;
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
         if (gunList.Count > 0)
             gunListPos = 0;
 
@@ -171,8 +180,33 @@ public class playerController : MonoBehaviour, IDamage, IPickup
             jumpCount = 0;
         }
 
-      
-        moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
+        // for cut scene and camera usint the cinamatic cameras 
+
+        // get teh camera directions
+
+        Vector3 cameraForward = Camera.main.transform.forward;
+
+        Vector3 cameraRight = Camera.main.transform.right;
+
+        //remove the y so the player dosent walk into the ground 
+
+        cameraForward.y = 0;
+
+        cameraRight.y = 0;
+
+        cameraForward = cameraForward.normalized;
+
+        cameraRight = cameraRight.normalized;
+
+        // calculat moveDir based on camera instead of  transform 
+
+        moveDir = (cameraForward * Input.GetAxis("Vertical")) + (cameraRight * Input.GetAxis("Horizontal"));
+
+        if (moveDir.magnitude > 0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+        }
+
         controller.Move(moveDir * speed * Time.deltaTime);
 
         jump();

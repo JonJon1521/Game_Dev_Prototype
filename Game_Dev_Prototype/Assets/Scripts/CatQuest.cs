@@ -27,6 +27,8 @@ public class CatQuest : MonoBehaviour
 
     private bool canInteract;
 
+    private playerController playerScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -56,7 +58,10 @@ public class CatQuest : MonoBehaviour
 
         tracker.AddPopularity(15); // add to our popularity
 
-        GetComponent<playerController>().enabled = false; // this "freezes" the player so the ther are no camera jitters
+        if (playerScript != null) // disabel the player not the girl if its not null but its also just shouldnt disable the girl
+        {
+            playerScript.enabled = false; // this "freezes" the player so the ther are no camera jitters 
+        }
 
         savedCat.Play(); // plays the cut sceen
 
@@ -72,7 +77,10 @@ public class CatQuest : MonoBehaviour
 
         tracker.AddPopularity(-15); // add to our popularity
 
-        GetComponent<playerController>().enabled = false; // this "freezes" the player so the ther are no camera jitters
+        if (playerScript != null) // disable the player not the girl if its not null but it also just shouldnt disable the girls
+        {
+            playerScript.enabled = false; // this "freezes" the player so the ther are no camera jitters
+        }
 
         noSaveCat.Play(); // plays the cut sceen
 
@@ -87,6 +95,8 @@ public class CatQuest : MonoBehaviour
             canInteract = true; // allow the e to work
 
             interactPrompt.SetActive(true); // show the "press e prompt
+
+            playerScript = other.GetComponent<playerController>();
         }
     }
 
@@ -113,7 +123,10 @@ public class CatQuest : MonoBehaviour
     {
         yield return new WaitForSeconds(delay); // wait for the length of the cut scene
 
-        GetComponent<playerController>().enabled = true; // give control back
+        if (playerScript != null)
+        {
+            playerScript.enabled = true; // give control back
+        }
 
         Cursor.lockState = CursorLockMode.Locked; // snap mouse to center 
 
