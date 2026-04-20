@@ -12,7 +12,7 @@ public class ManaPotion : MonoBehaviour
 
      void Update()
     {
-        if ( canPickUp && Input.GetKeyDown(KeyCode.E))
+        if ( canPickUp && Input.GetKeyDown(KeyCode.F))
         {
             pickUP();
 
