@@ -235,13 +235,13 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         {
             shoot();
         }
-      
+
         selectGun();
 
         if (aud != null && audStep.Length > 0 && moveDir.normalized.magnitude > 0.3f && !isPlayingStep)
         {
-            
-                StartCoroutine(playStep());
+
+            StartCoroutine(playStep());
         }
     }
 
@@ -380,11 +380,11 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
 
 
-   public void updatePlayerUI()
-{
-    gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
-    gamemanager.instance.playerManaBar.fillAmount = (float)Mana / ManaOriginal;
-}
+    public void updatePlayerUI()
+    {
+        gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
+        gamemanager.instance.playerManaBar.fillAmount = (float)Mana / ManaOriginal;
+    }
 
 
     public void getGunStats(gunStats gun)
@@ -438,7 +438,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         HP = Mathf.Clamp(HP, 0, HPOriginal);
         updatePlayerUI();
 
-    }  
+    }
     public void restoreMana(int amount)
     {
         Mana += amount;
@@ -470,7 +470,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
             if (gunList[gunListPos].reloadSound != null)
                 aud.PlayOneShot(gunList[gunListPos].reloadSound, gunList[gunListPos].reloadSoundVol);
         }
-    } 
+    }
     public void AddAmmo(int amount)
     {
         if (gunList.Count == 0) return;
@@ -479,7 +479,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
         // Clamp to session max
         if (gunAmmoCur[gunListPos] > gunAmmoMaxSession[gunListPos])
-         gunAmmoCur[gunListPos] = gunAmmoMaxSession[gunListPos];
+            gunAmmoCur[gunListPos] = gunAmmoMaxSession[gunListPos];
 
         gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
     }
@@ -529,5 +529,5 @@ public class playerController : MonoBehaviour, IDamage, IPickup
             gamemanager.instance.UpdateSpellUI(spellLoadout);
         }
     }
-   
+
 }

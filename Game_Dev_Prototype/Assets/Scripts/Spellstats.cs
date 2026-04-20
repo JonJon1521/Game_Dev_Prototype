@@ -5,6 +5,7 @@ using UnityEngine.Rendering;
 public class Spellstats : ScriptableObject
 {
     public GameObject Spell;
+
     [Range(0, 100)] public int manaCost;
 
     [Range(3, 15)] public int shootDamage;
