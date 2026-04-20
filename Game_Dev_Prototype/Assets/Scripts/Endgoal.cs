@@ -2,7 +2,18 @@ using UnityEngine;
 
 public class Endgoal : MonoBehaviour
 {
+    int requiredCollectibles;
+    int amount;
     bool playerInRange;
+
+    void Start()
+    {
+        requiredCollectibles =
+            Object.FindObjectsByType<Collectible>(FindObjectsSortMode.None).Length;
+
+        gamemanager.instance.SetRequiredCollectibles(requiredCollectibles);
+    }
+
 
     void Update()
     {
