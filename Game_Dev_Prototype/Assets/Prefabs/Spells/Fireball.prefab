@@ -70,7 +70,7 @@ MonoBehaviour:
   rateOfDamage: 0
   speed: 10
   destroyTime: 3
-  hit: {fileID: 0}
+  hit: {fileID: 199954432634067247, guid: fd06be833f3273f41a3ce6a2951d34d2, type: 3}
 --- !u!96 &5865065353142497821
 TrailRenderer:
   serializedVersion: 4

@@ -90,14 +90,18 @@ public class gamemanager : MonoBehaviour
         menuActive = null;
     }
 
-    public void updateGameGoal(int amount)
+ 
+  public void updateGameGoal(int amount)
     {
         gameGoalCount += amount;
+
+        if (gameGoalCount < 0)
+            gameGoalCount = 0;
+
         gameGoalCountText.text = gameGoalCount.ToString("F0");
 
-        if (gameGoalCount <= 0)
+        if (gameGoalCount == 0)
         {
-            // unlock exit instead of instantly winning
             goalUnlocked = true;
         }
     }
