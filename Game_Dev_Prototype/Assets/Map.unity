@@ -246,6 +246,20 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 2489491156576474834, guid: e869e19945c1e174180658437a894163, type: 3}
   m_PrefabInstance: {fileID: 1346777391138415270}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &20777775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20777772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba49d4ab2ca4c0b41a9a151fae64efe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ManaSystem
+  maxMana: 100
+  currentMana: 0
 --- !u!1 &41669587
 GameObject:
   m_ObjectHideFlags: 0
@@ -6675,6 +6689,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490229399}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1517955934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1517955936}
+  - component: {fileID: 1517955935}
+  m_Layer: 0
+  m_Name: SpellManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1517955935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517955934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 029c5d2c6e23c674881a4849ac1caa32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Spellslot
+  equippedSpells:
+  - {fileID: 11400000, guid: 34cff2af455f6dd4e96938a2f948e5ee, type: 2}
+  - {fileID: 11400000, guid: 6eda961211c3a3949a50ea88acb122ea, type: 2}
+--- !u!4 &1517955936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517955934}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1524685855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7634,7 +7695,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f6538fbed67b3b4cb6e5c2cc601ed6d, type: 3}
---- !u!1 &1695121246 stripped
+--- !u!1 &1695121246
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7645,8 +7706,8 @@ GameObject:
   - component: {fileID: 1695121249}
   - component: {fileID: 1695121248}
   - component: {fileID: 1695121247}
-  m_Layer: 5
-  m_Name: potion prompt
+  m_Layer: 0
+  m_Name: 
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7758,6 +7819,19 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695121246}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1709413610
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9623,10 +9697,21 @@ PrefabInstance:
       propertyPath: Mana
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 4620335139280802719, guid: e869e19945c1e174180658437a894163, type: 3}
+      propertyPath: spellslot
+      value: 
+      objectReference: {fileID: 1517955935}
+    - target: {fileID: 4620335139280802719, guid: e869e19945c1e174180658437a894163, type: 3}
+      propertyPath: manaSystem
+      value: 
+      objectReference: {fileID: 20777775}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 638851036564823962, guid: e869e19945c1e174180658437a894163, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 20777775}
   m_SourcePrefab: {fileID: 100100000, guid: e869e19945c1e174180658437a894163, type: 3}
 --- !u!1001 &1861047633309793354
 PrefabInstance:
@@ -12035,6 +12120,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1695121249}
   - {fileID: 50856034}
   - {fileID: 829432973}
   - {fileID: 7202262259109811327}
@@ -12120,3 +12206,4 @@ SceneRoots:
   - {fileID: 1961224509}
   - {fileID: 1138452490}
   - {fileID: 2088164827}
+  - {fileID: 1517955936}

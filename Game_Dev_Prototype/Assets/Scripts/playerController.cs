@@ -7,14 +7,14 @@ using UnityEditor.Experimental.GraphView;
 #endif
 using UnityEngine;
 
-
-
 public class playerController : MonoBehaviour, IDamage, IPickup
 {
 
     [Header("Spellcasting")]
     [SerializeField] private List<GameObject> spellLoadout = new List<GameObject>();
     [SerializeField] private List<Spellstats> spellStats = new List<Spellstats>();
+    [SerializeField] ManaSystem manaSystem;
+    [SerializeField] Spellslot spellslot;
 
     [SerializeField] private Transform castPoint;
 
@@ -509,12 +509,19 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     void CastSpell(int index)
     {
+        if (spellslot == null) return;
+
+        Spellstats stats = spellslot.GetSpell(index);
+        if (stats == null) return;
+
         if (index < 0 || index >= spellLoadout.Count) return;
 
         GameObject spellPrefab = spellLoadout[index];
-        if (spellPrefab == null) return;
+        if (spellPrefab == null || castPoint == null) return;
 
-        if (castPoint == null) return;
+
+        if (manaSystem != null && !manaSystem.UseMana(stats.manaCost))
+            return;
 
         Instantiate(
             spellPrefab,
