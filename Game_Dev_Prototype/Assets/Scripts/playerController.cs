@@ -24,7 +24,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~Stats (ints)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     [Header("Stats")]
     [Range(1, 100)][SerializeField] int HP;
@@ -47,7 +47,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
     [SerializeField] GameObject gunModel;
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~Audio~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     [Header("Audio")]
     [SerializeField] AudioSource aud;

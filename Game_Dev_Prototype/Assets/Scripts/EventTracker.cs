@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "WorldState", menuName = "Game/Event Tracker")]
 
@@ -9,9 +10,13 @@ public class EventTracker : ScriptableObject
 
     public int popularity;
 
+    public UnityEvent<int> onPopularityChanged;
+
    public void AddPopularity(int amount)
     {
-        popularity += amount;
+        popularity = Mathf.Clamp(popularity + amount, 0, 100);
+
+        onPopularityChanged?.Invoke(popularity);
 
         Debug.Log("Popularity is now:" + popularity);
     }
@@ -20,6 +25,6 @@ public class EventTracker : ScriptableObject
     {
         catSaved = false;
 
-        popularity = 100;
+        popularity = 50;
     }
 }
