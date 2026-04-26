@@ -199,7 +199,7 @@ public class gamemanager : MonoBehaviour
 
             playerPopularityBar.transform.localScale = new Vector3(fullness, 1, 1); // this scales it on the x axies (long ways up down)
         }
-    }
+    } 
 
     void OnEnable()
     {

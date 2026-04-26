@@ -21,7 +21,7 @@ public class EventTracker : ScriptableObject
         Debug.Log("Popularity is now:" + popularity);
     }
 
-    public void ResetGame()
+    public void ResetGame() // for new games 
     {
         catSaved = false;
 
