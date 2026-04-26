@@ -6,13 +6,13 @@ using UnityEngine.Events;
 public class EventTracker : ScriptableObject
 {
 
-    public bool catSaved;
+    public bool catSaved; // log for cat quest 
 
-    public int popularity;
+    public int popularity; // log for popularity
 
     public UnityEvent<int> onPopularityChanged;
 
-   public void AddPopularity(int amount)
+   public void AddPopularity(int amount) 
     {
         popularity = Mathf.Clamp(popularity + amount, 0, 100);
 

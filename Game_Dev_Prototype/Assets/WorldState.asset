@@ -10,7 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01258b10cf50b5f468ee408e85182cd6, type: 3}
-  m_Name: MainWorldState
+  m_Name: WorldState
   m_EditorClassIdentifier: Assembly-CSharp::EventTracker
-  catSaved: 0
-  popularity: 0
+  catSaved: 1
+  popularity: 50
+  onPopularityChanged:
+    m_PersistentCalls:
+      m_Calls: []

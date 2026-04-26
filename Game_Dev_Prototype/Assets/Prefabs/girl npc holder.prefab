@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392e0e073de10464fa8e4699cf9ffe58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CatQuest
-  tracker: {fileID: 11400000, guid: 8fae9e39fc361bf4ca0b8180f54f3a0d, type: 2}
+  tracker: {fileID: 11400000, guid: cc7315d01226746498eb08da77d48403, type: 2}
   choiceUI: {fileID: 0}
   savedCat: {fileID: 0}
   noSaveCat: {fileID: 0}
