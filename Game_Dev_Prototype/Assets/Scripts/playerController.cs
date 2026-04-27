@@ -19,20 +19,6 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
 
-<<<<<<< Updated upstream
-    //~~~~~~~~~~~~~~~~~~~~Stats (ints)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    [Header("Stats")]
-    [Range(1, 100)][SerializeField] int HP;
-    [Range(1, 100)][SerializeField] int Mana;
-    [Range(1, 10)][SerializeField] int speed;
-    [Range(2, 6)][SerializeField] int sprintMod;
-    [Range(5, 25)][SerializeField] int jumpSpeed;
-    [Range(1, 4)][SerializeField] int jumptimesMax;
-    [Range(15, 50)][SerializeField] int gravity;
-
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-=======
     [Header("Stats (Managed by StatsManager)")]
     [SerializeField] int currentHP;
     [SerializeField] int currentMana;
@@ -40,7 +26,6 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] int jumpSpeed = 15;
     [SerializeField] int jumptimesMax = 2;
     [SerializeField] int gravity = 30;
->>>>>>> Stashed changes
 
     [Header("Dodge Settings")]
     [SerializeField] float dodgeDistance = 3f;
@@ -50,11 +35,6 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
     [SerializeField] GameObject gunModel;
 
-<<<<<<< Updated upstream
-    //~~~~~~~~~~~~~~~~~~~~Audio~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-=======
->>>>>>> Stashed changes
     [Header("Audio")]
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip[] audJump;
@@ -93,8 +73,8 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         spawnPlayer();
 
         // 3. Setup Cursor
-
-      
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         if (gunList.Count > 0)
             gunListPos = 0;
@@ -185,16 +165,6 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         }
     }
 
-    public void removeSlowSpeed(int amount)
-    {
-        sprintMod *= amount;
-    }
-    public void applySlowSpeed(int amount)
-    {
-        sprintMod /= amount;
-    }
-
-
     void jump()
     {
         if (Input.GetButtonDown("Jump") && jumpCount < jumptimesMax)
@@ -217,10 +187,10 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     {
         currentHP -= damage;
         updatePlayerUI();
-
+        
         if (audHurt.Length > 0)
             aud.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audHurtVol);
-
+        
         StartCoroutine(flashDamage());
 
         if (currentHP <= 0)
@@ -249,6 +219,28 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         currentMana = Mathf.Clamp(currentMana, 0, (int)stats.maxMana);
         updatePlayerUI();
     }
+    public void EquipSpell(int slotIndex)
+    {
+        if (slotIndex < 0 || slotIndex >= spellLoadout.Count) return;
+
+        GameObject spellPrefab = spellLoadout[slotIndex];
+        if (spellPrefab == null) return;
+
+        if (activeSpells == null || activeSpells.Length != spellLoadout.Count)
+            activeSpells = new GameObject[spellLoadout.Count];
+
+        if (activeSpells[slotIndex] != null)
+            Destroy(activeSpells[slotIndex]);
+
+        activeSpells[slotIndex] = Instantiate(
+            spellPrefab,
+            transform.position,
+            Quaternion.identity,
+            transform
+        );
+
+        gamemanager.instance.UpdateSpellUI(spellLoadout);
+    }
 
     void CastSpell(int index)
     {
@@ -270,7 +262,19 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         }
     }
 
-    // --- REUSE YOUR EXISTING GUN/DODGE METHODS BELOW ---
+    public void AddAmmo(int amount)
+    {
+        if (gunList.Count == 0) return;
+
+        gunAmmoMaxSession[gunListPos] += amount; // add to the reserved (pockets) , not the current ammo
+
+        // Clamp to session max
+        if (gunAmmoCur[gunListPos] > gunAmmoMaxSession[gunListPos])
+            gunAmmoCur[gunListPos] = gunAmmoMaxSession[gunListPos];
+
+        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
+    }
+
 
     void shoot()
     {
@@ -368,20 +372,6 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         }
     }
 
-    public void AddAmmo(int amount)
-    {
-        if (gunList.Count == 0) return;
-
-        gunAmmoMaxSession[gunListPos] += amount; // add to the reserved (pockets) , not the current ammo
-
-        // Clamp to session max
-        if (gunAmmoCur[gunListPos] > gunAmmoMaxSession[gunListPos])
-            gunAmmoCur[gunListPos] = gunAmmoMaxSession[gunListPos];
-
-        gamemanager.instance.updateAmmoUI(gunAmmoCur[gunListPos], gunAmmoMaxSession[gunListPos]);
-    }
-
-
     public void getGunStats(gunStats gun)
     {
         gunList.Add(gun);
@@ -414,4 +404,13 @@ public class playerController : MonoBehaviour, IDamage, IPickup
             changeGun();
         }
     }
+    public void removeSlowSpeed(int amount)
+    {
+        sprintMod *= amount;
+    }
+    public void applySlowSpeed(int amount)
+    {
+        sprintMod /= amount;
+    }
+
 }
