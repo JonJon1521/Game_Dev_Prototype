@@ -172,6 +172,14 @@ public class EnemyGuard : MonoBehaviour, IDamage
         if (isDead) return;
         isDead = true;
 
+        // give XP to player
+        StatsManager playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<StatsManager>();
+        if (playerStats != null)
+        {
+           // Give XP per kill
+            playerStats.AddXP(100);
+        }
+
         // --- DETACHES THE DIALOGUE ---
         if (dialogueCanvas != null)
         {

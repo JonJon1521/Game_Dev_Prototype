@@ -112,7 +112,16 @@ public class gamemanager : MonoBehaviour
                 stateUnpaused();
             }
         }
-
+        if (!isPaused)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
     public void statePaused()
