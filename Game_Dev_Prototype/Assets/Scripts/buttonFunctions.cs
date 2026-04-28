@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-
 public class ButtonFunctions : MonoBehaviour
 {
     public void resume()
@@ -31,5 +30,15 @@ public class ButtonFunctions : MonoBehaviour
         gamemanager.instance.playerScript.spawnPlayer();
         gamemanager.instance.stateUnpaused();
     }
+    public void OpenOptions()
+    {
+        gamemanager.instance.OpenOptions();
+    }
+
+    public void CloseOptions()
+    {
+        gamemanager.instance.CloseOptions();
+    }
 }
+
 

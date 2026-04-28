@@ -12,7 +12,9 @@ public class gamemanager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject optionsMenu;
     public GameObject levelUpPanel;   // Drag Level Up Panel here
+
 
 
     //~~~~~~~~~~~~~~~~~~~~~Ints~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -244,5 +246,22 @@ public class gamemanager : MonoBehaviour
         {
             tracker.onPopularityChanged.RemoveListener(updatePopularityUI); // cleans up when teh scene closes 
         }
+    }
+    public void OpenOptions()
+    {
+        menuPause.SetActive(false);
+        optionsMenu.SetActive(true);
+    }
+
+    public void CloseOptions()
+    {
+        optionsMenu.SetActive(false);
+        menuPause.SetActive(true);
+    }
+    public void SetVolume(float volume)
+    {
+        AudioListener.volume = volume;
+        PlayerPrefs.SetFloat("Volume", volume);
+        PlayerPrefs.Save();
     }
 }
