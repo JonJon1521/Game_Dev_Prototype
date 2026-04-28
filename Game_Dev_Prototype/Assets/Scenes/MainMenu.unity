@@ -525,6 +525,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1372397214032578402, guid: 9abf8a7391ea6d940be8f474c4ea3031, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630989370974655895, guid: 9abf8a7391ea6d940be8f474c4ea3031, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3571013285628622230, guid: 9abf8a7391ea6d940be8f474c4ea3031, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3874293778490388206, guid: 9abf8a7391ea6d940be8f474c4ea3031, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796245743587791234, guid: 9abf8a7391ea6d940be8f474c4ea3031, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450285466054154685, guid: 9abf8a7391ea6d940be8f474c4ea3031, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5459279303149716484, guid: 9abf8a7391ea6d940be8f474c4ea3031, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -603,6 +627,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5459279303149716484, guid: 9abf8a7391ea6d940be8f474c4ea3031, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782774462992502683, guid: 9abf8a7391ea6d940be8f474c4ea3031, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204709203174109906, guid: 9abf8a7391ea6d940be8f474c4ea3031, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1217,9 +1249,9 @@ RectTransform:
   - {fileID: 1196660078}
   m_Father: {fileID: 1581759463}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -292}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 248}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1396391103
