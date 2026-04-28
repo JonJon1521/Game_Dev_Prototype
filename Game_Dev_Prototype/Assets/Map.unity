@@ -13876,7 +13876,7 @@ GameObject:
   - component: {fileID: 62158101}
   - component: {fileID: 62158100}
   m_Layer: 5
-  m_Name: RawImage (2)
+  m_Name: rent due 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35230,7 +35230,7 @@ GameObject:
   - component: {fileID: 144453310}
   - component: {fileID: 144453309}
   m_Layer: 5
-  m_Name: RawImage (8)
+  m_Name: rent due 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54461,7 +54461,7 @@ GameObject:
   - component: {fileID: 218652976}
   - component: {fileID: 218652975}
   m_Layer: 5
-  m_Name: RawImage (3)
+  m_Name: rent due 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61134,7 +61134,7 @@ GameObject:
   - component: {fileID: 245857915}
   - component: {fileID: 245857914}
   m_Layer: 5
-  m_Name: RawImage (5)
+  m_Name: rent due 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145374,7 +145374,7 @@ GameObject:
   - component: {fileID: 613439818}
   - component: {fileID: 613439817}
   m_Layer: 5
-  m_Name: RawImage (7)
+  m_Name: rent due 14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164432,7 +164432,7 @@ GameObject:
   - component: {fileID: 681629282}
   - component: {fileID: 681629281}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: rent due
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165640,7 +165640,7 @@ GameObject:
   - component: {fileID: 685461576}
   - component: {fileID: 685461575}
   m_Layer: 5
-  m_Name: RawImage (13)
+  m_Name: rent due 11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221080,6 +221080,78 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &906838638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 906838639}
+  - component: {fileID: 906838641}
+  - component: {fileID: 906838640}
+  m_Layer: 5
+  m_Name: Flyer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &906838639
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906838638}
+  m_LocalRotation: {x: 0.000000029802322, y: 0.000000059604645, z: 0.30187088, w: 0.9533488}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1385694226}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 35.14}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -255, y: -321}
+  m_SizeDelta: {x: 180, y: 180}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &906838640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906838638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: 03769d684feb5a247b91cf37493f457e, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &906838641
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906838638}
+  m_CullTransparentMesh: 1
 --- !u!1 &906944835
 GameObject:
   m_ObjectHideFlags: 0
@@ -232301,7 +232373,7 @@ GameObject:
   - component: {fileID: 954834169}
   - component: {fileID: 954834168}
   m_Layer: 5
-  m_Name: RawImage (11)
+  m_Name: rent due 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -232825,7 +232897,7 @@ GameObject:
   - component: {fileID: 956383606}
   - component: {fileID: 956383605}
   m_Layer: 5
-  m_Name: RawImage (1)
+  m_Name: rent due 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -310153,7 +310225,7 @@ GameObject:
   - component: {fileID: 1254270102}
   - component: {fileID: 1254270101}
   m_Layer: 5
-  m_Name: RawImage (4)
+  m_Name: rent due 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -345434,6 +345506,7 @@ RectTransform:
   - {fileID: 1761045063}
   - {fileID: 613439816}
   - {fileID: 1892958221}
+  - {fileID: 906838639}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 89.213, y: 45.01, z: -62.31}
   m_AnchorMin: {x: 0, y: 0}
@@ -386338,7 +386411,7 @@ GameObject:
   - component: {fileID: 1552786479}
   - component: {fileID: 1552786478}
   m_Layer: 5
-  m_Name: RawImage (10)
+  m_Name: rent due 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -390078,7 +390151,7 @@ GameObject:
   - component: {fileID: 1565626547}
   - component: {fileID: 1565626546}
   m_Layer: 5
-  m_Name: RawImage (12)
+  m_Name: rent due 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -437960,7 +438033,7 @@ GameObject:
   - component: {fileID: 1761045065}
   - component: {fileID: 1761045064}
   m_Layer: 5
-  m_Name: RawImage (14)
+  m_Name: rent due 13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -468956,7 +469029,7 @@ GameObject:
   - component: {fileID: 1892958223}
   - component: {fileID: 1892958222}
   m_Layer: 5
-  m_Name: RawImage (15)
+  m_Name: rent due 15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -496354,7 +496427,7 @@ GameObject:
   - component: {fileID: 2001618881}
   - component: {fileID: 2001618880}
   m_Layer: 5
-  m_Name: RawImage (9)
+  m_Name: rent due 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -508456,7 +508529,7 @@ GameObject:
   - component: {fileID: 2052963109}
   - component: {fileID: 2052963108}
   m_Layer: 5
-  m_Name: RawImage (6)
+  m_Name: rent due 12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
