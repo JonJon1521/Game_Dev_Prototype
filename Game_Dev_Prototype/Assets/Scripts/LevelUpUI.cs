@@ -1,22 +1,23 @@
 using UnityEngine;
-using TMPro; // Use TextMeshPro for better looking text
+using TMPro;
 using UnityEngine.UI;
 
 public class LevelUpUIScript : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] StatsManager stats;
-    [SerializeField] GameObject uiPanel;
+    [SerializeField] private GameObject uiPanel;
+    private StatsManager playerStats;
 
-    [Header("Text Elements")]
-    [SerializeField] TMP_Text pointsRemainingText;
-    [SerializeField] TMP_Text strText, spdText, intText, hpText;
-
-    bool isMenuOpen = false;
+    [Header("UI Text Elements")]
+    [SerializeField] private TMP_Text pointsRemainingText;
+    [SerializeField] private TMP_Text strText;
+    [SerializeField] private TMP_Text spdText;
+    [SerializeField] private TMP_Text intText;
+    [SerializeField] private TMP_Text hpText;
 
     void Update()
     {
-        // Press 'P' to open the Level Up menu
+        // 'P' key to toggle the menu
         if (Input.GetKeyDown(KeyCode.P))
         {
             ToggleMenu();
@@ -25,42 +26,66 @@ public class LevelUpUIScript : MonoBehaviour
 
     public void ToggleMenu()
     {
-        isMenuOpen = !isMenuOpen;
-        uiPanel.SetActive(isMenuOpen);
+        // active state of the panel
+        bool isOpening = !uiPanel.activeSelf;
+        uiPanel.SetActive(isOpening);
 
-        if (isMenuOpen)
+        if (isOpening)
         {
-            // tell the GameManager we are paused so it stops locking the mouse
-            if (gamemanager.instance != null) gamemanager.instance.isPaused = true;
-
-            UpdateUIValues();
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            Time.timeScale = 0;
-        }
-        else
-        {
-            // tell the GameManager we are back in action
-            if (gamemanager.instance != null) gamemanager.instance.isPaused = false;
-
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            Time.timeScale = 1;
+            // find the Player and their StatsManager
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                playerStats = player.GetComponent<StatsManager>();
+                UpdateUIValues(); // Refresh numbers immediately
+                Debug.Log("Level Up Menu Opened: Player Found.");
+            }
+            else
+            {
+                Debug.LogError("Level Up Menu: NO PLAYER FOUND! Check the 'Player' tag.");
+            }
         }
     }
 
+    // This is the function linked to your [ + ] Buttons
     public void Upgrade(string statName)
     {
-        stats.UpgradeAttribute(statName);
-        UpdateUIValues();
+        Debug.Log("THE BUTTON WAS PRESSED! Stat requested: " + statName);
+    
+        // Safety Check: for player reference, try to find it one last time
+        if (playerStats == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null) playerStats = player.GetComponent<StatsManager>();
+        }
+
+        if (playerStats != null)
+        {
+            if (playerStats.skillPoints > 0)
+            {
+                Debug.Log("Attempting to upgrade: " + statName);
+
+                playerStats.UpgradeAttribute(statName);
+
+                // Refresh UI text so the player sees the change
+                UpdateUIValues();
+            }
+            else
+            {
+                Debug.LogWarning("Cannot upgrade: 0 skill points remaining.");
+            }
+        }
     }
 
-    void UpdateUIValues()
+    public void UpdateUIValues()
     {
-        pointsRemainingText.text = "Skill Points: " + stats.skillPoints;
-        strText.text = stats.strength.ToString();
-        spdText.text = stats.speed.ToString();
-        intText.text = stats.intelligence.ToString();
-        hpText.text = stats.health.ToString();
+        if (playerStats == null) return;
+
+        // Update all the text fields with the latest numbers from StatsManager
+        pointsRemainingText.text = "Skill Points: " + playerStats.skillPoints;
+        strText.text = playerStats.strength.ToString();
+        spdText.text = playerStats.speed.ToString();
+        intText.text = playerStats.intelligence.ToString();
+        hpText.text = playerStats.health.ToString();
     }
 }

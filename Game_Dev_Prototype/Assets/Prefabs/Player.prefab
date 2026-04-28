@@ -69,15 +69,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currLevel: 1
   currXP: 0
-  skillPoints: 0
+  skillPoints: 2
   strength: 1
   speed: 1
   intelligence: 1
   health: 1
-  moveSpeed: 100
-  maxHealth: 100
-  maxMana: 100
-  carryCapacity: 200
+  moveSpeed: 0
+  maxHealth: 0
+  maxMana: 0
+  carryCapacity: 0
 --- !u!114 &4620335139280802719
 MonoBehaviour:
   m_ObjectHideFlags: 0

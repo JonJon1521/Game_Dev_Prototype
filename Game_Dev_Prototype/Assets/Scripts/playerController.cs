@@ -66,13 +66,11 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     void Start()
     {
-        // 1. Grab the StatsManager
+        // Grab the StatsManager
         stats = GetComponent<StatsManager>();
-
-        // 2. Initialize the player
         spawnPlayer();
 
-        // 3. Setup Cursor
+       
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -178,7 +176,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     void sprint()
     {
-        // Simple toggle for movement calculation
+        // toggle for movement calculation
         if (Input.GetButtonDown("Sprint")) isSprinting = true;
         else if (Input.GetButtonUp("Sprint")) isSprinting = false;
     }

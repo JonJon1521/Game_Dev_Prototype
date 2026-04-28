@@ -12,6 +12,10 @@ public class gamemanager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject optionsMenu;
+    public GameObject levelUpPanel;   // Drag Level Up Panel here
+
+
 
     //~~~~~~~~~~~~~~~~~~~~~Ints~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -82,8 +86,8 @@ public class gamemanager : MonoBehaviour
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
         gameGoalCount =
         Object.FindObjectsByType<Collectible>(FindObjectsSortMode.None).Length;
-
-        
+            
+            
     }
 
     void Start()
@@ -99,6 +103,24 @@ public class gamemanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Check if ANY menu is currently active
+        bool isAnyMenuOpen = (menuPause != null && menuPause.activeSelf) ||
+                             (levelUpPanel != null && levelUpPanel.activeSelf);
+
+        // Handle Cursor and Time based on that check
+        if (isAnyMenuOpen)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0f; // Pause game time
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1f; // Resume game time
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (menuActive != menuPause)
@@ -224,5 +246,22 @@ public class gamemanager : MonoBehaviour
         {
             tracker.onPopularityChanged.RemoveListener(updatePopularityUI); // cleans up when teh scene closes 
         }
+    }
+    public void OpenOptions()
+    {
+        menuPause.SetActive(false);
+        optionsMenu.SetActive(true);
+    }
+
+    public void CloseOptions()
+    {
+        optionsMenu.SetActive(false);
+        menuPause.SetActive(true);
+    }
+    public void SetVolume(float volume)
+    {
+        AudioListener.volume = volume;
+        PlayerPrefs.SetFloat("Volume", volume);
+        PlayerPrefs.Save();
     }
 }
