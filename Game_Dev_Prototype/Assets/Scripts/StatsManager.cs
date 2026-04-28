@@ -45,27 +45,35 @@ public class StatsManager : MonoBehaviour
 
     public void UpgradeAttribute(string attributeName)
     {
+     
+        // should be <= 0.
         if (skillPoints <= 0) return;
+
+        // Add this Debug to see what name is actually being sent
+        Debug.Log("StatsManager received upgrade request for: " + attributeName);
 
         switch (attributeName.ToLower())
         {
             case "strength":
                 strength++;
+                skillPoints--;
                 break;
             case "speed":
                 speed++;
+                skillPoints--;
                 break;
             case "intelligence":
                 intelligence++;
+                skillPoints--;
                 break;
             case "health":
                 health++;
+                skillPoints--;
                 break;
             default:
                 Debug.LogWarning("Attribute" + attributeName + "does not exist");
                 return;
         }
-        skillPoints--;
         UpdateGameplayStats();
     }
 

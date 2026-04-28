@@ -44,11 +44,28 @@ public class CatQuest : MonoBehaviour
 
             choiceUI.SetActive(true); // turn on the UI buttons on the screen
 
-            Cursor.lockState = CursorLockMode.None; // unlock the mouse from the center of the screen
+            if(playerScript != null)
+            {
+                playerScript.enabled = false; // so we can use teh mouse to make a choice
+            }
 
-            Cursor.visible = true; // make the mouse cursor visible so you can click
+        }
+
+        if(choiceUI.activeSelf) // new controls for cat quest options 
+        {
+            if(Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                OnSavedCat();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                OnNoSavedCat();
+            }
         }
     }
+
+  
 
     public void OnSavedCat()
     {
