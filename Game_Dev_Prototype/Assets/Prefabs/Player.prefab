@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2109548988812877500}
+  - component: {fileID: 4511653053037747979}
   - component: {fileID: -7747000723229646958}
   - component: {fileID: 4620335139280802719}
   - component: {fileID: -6308406431859260662}
@@ -41,6 +42,19 @@ Transform:
   - {fileID: 3069698294737309390}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4511653053037747979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638851036564823962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba49d4ab2ca4c0b41a9a151fae64efe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ManaSystem
+  currentMana: 0
 --- !u!114 &-7747000723229646958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,7 +94,7 @@ MonoBehaviour:
   - {fileID: 4677377172591258091, guid: 499901e35b3f96d4f9bd15c1cab456ce, type: 3}
   - {fileID: 4677377172591258091, guid: e0ed4555114de3e4198ef5018e13cbed, type: 3}
   spellStats: []
-  manaSystem: {fileID: 0}
+  manaSystem: {fileID: 4511653053037747979}
   spellslot: {fileID: 0}
   castPoint: {fileID: 3069698294737309390}
   controller: {fileID: -6308406431859260662}
@@ -176,6 +190,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -197,9 +213,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!136 &6624234900178237370
 CapsuleCollider:
@@ -509,7 +527,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -517,6 +534,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!114 &1868165394404884581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,7 +713,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -703,6 +720,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &2983375374061222941
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,6 +831,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -834,7 +854,9 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
