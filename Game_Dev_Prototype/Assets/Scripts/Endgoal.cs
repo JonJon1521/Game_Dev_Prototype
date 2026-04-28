@@ -6,6 +6,8 @@ public class Endgoal : MonoBehaviour
     int amount;
     bool playerInRange;
 
+    public GameObject interactPrompt;
+
     void Start()
     {
         requiredCollectibles =
@@ -19,6 +21,8 @@ public class Endgoal : MonoBehaviour
     {
         if (playerInRange && Input.GetKeyDown(KeyCode.L))
         {
+            interactPrompt.SetActive(false); // hide the L propmt because we are now talking
+
             if (gamemanager.instance.IsGoalUnlocked())
             {
                 gamemanager.instance.ShowWinMenu();
@@ -34,11 +38,13 @@ public class Endgoal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
             playerInRange = true;
+        interactPrompt.SetActive(true); // show the "press e prompt
     }
 
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
             playerInRange = false;
+        interactPrompt.SetActive(false); // hide it if you walk away 
     }
 }
