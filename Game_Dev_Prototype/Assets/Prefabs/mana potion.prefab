@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc7d7df2e21fc3a44af6fce5708fc09b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ManaPotion
-  manaAmount: 20
+  manaAmount: 50
   playerScript: {fileID: 0}
   canPickUp: 0
   interactPrompt: {fileID: 0}
