@@ -358768,8 +358768,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7502426767206674970, guid: 583250e0fd884da47a947dec1f1077fa, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1413574259}
   m_SourcePrefab: {fileID: 100100000, guid: 583250e0fd884da47a947dec1f1077fa, type: 3}
+--- !u!1 &1413574258 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7502426767206674970, guid: 583250e0fd884da47a947dec1f1077fa, type: 3}
+  m_PrefabInstance: {fileID: 1413574257}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1413574259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413574258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eb56f186c34044bac9b7929b835e54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Endgoal
+  interactPrompt: {fileID: 1886701321}
 --- !u!1 &1413617475
 GameObject:
   m_ObjectHideFlags: 0
