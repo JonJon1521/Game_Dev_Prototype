@@ -21,7 +21,7 @@ public class StatsManager : MonoBehaviour
     public float carryCapacity;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         // Stats based on starting attributes
         UpdateGameplayStats();
