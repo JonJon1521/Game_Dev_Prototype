@@ -105,7 +105,8 @@ public class gamemanager : MonoBehaviour
     {
         // Check if ANY menu is currently active
         bool isAnyMenuOpen = (menuPause != null && menuPause.activeSelf) ||
-                             (levelUpPanel != null && levelUpPanel.activeSelf);
+                             (levelUpPanel != null && levelUpPanel.activeSelf) ||
+                     (optionsMenu != null && optionsMenu.activeSelf);
 
         // Handle Cursor and Time based on that check
         if (isAnyMenuOpen)
@@ -121,7 +122,7 @@ public class gamemanager : MonoBehaviour
             Time.timeScale = 1f; // Resume game time
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !optionsMenu.activeSelf)
         {
             if (menuActive != menuPause)
             {
@@ -134,16 +135,7 @@ public class gamemanager : MonoBehaviour
                 stateUnpaused();
             }
         }
-        if (!isPaused)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
+       
     }
 
     public void statePaused()
