@@ -105,9 +105,10 @@ public class gamemanager : MonoBehaviour
     {
         // Check if ANY menu is currently active
         bool isAnyMenuOpen = (menuPause != null && menuPause.activeSelf) ||
-                             (levelUpPanel != null && levelUpPanel.activeSelf) ||
-                     (optionsMenu != null && optionsMenu.activeSelf);
-
+                      (levelUpPanel != null && levelUpPanel.activeSelf) ||
+                      (optionsMenu != null && optionsMenu.activeSelf) ||
+                      (menuWin != null && menuWin.activeSelf) ||
+                      (menuLose != null && menuLose.activeSelf);
         // Handle Cursor and Time based on that check
         if (isAnyMenuOpen)
         {
@@ -122,7 +123,10 @@ public class gamemanager : MonoBehaviour
             Time.timeScale = 1f; // Resume game time
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !optionsMenu.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Escape) &&
+    !optionsMenu.activeSelf &&
+    !menuWin.activeSelf &&
+    !menuLose.activeSelf)
         {
             if (menuActive != menuPause)
             {
