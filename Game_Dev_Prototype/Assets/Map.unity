@@ -541320,6 +541320,10 @@ PrefabInstance:
       propertyPath: spellslot
       value: 
       objectReference: {fileID: 1517955935}
+    - target: {fileID: 4620335139280802719, guid: e869e19945c1e174180658437a894163, type: 3}
+      propertyPath: sprintMod
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6721605516422613323, guid: e869e19945c1e174180658437a894163, type: 3}
       propertyPath: ShowCameraFrustum
       value: 1

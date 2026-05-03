@@ -333,16 +333,17 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     private IEnumerator DodgeRoutine(Vector3 dir)
     {
         isDodging = true;
-        Vector3 startPos = transform.position;
-        Vector3 targetPos = startPos + dir * dodgeDistance;
-        float t = 0f;
-        while (t < 1f)
+
+        float elapsed = 0f;
+        float duration = dodgeDistance / dodgeSpeed;
+
+        while (elapsed < duration)
         {
-            transform.position = Vector3.Lerp(startPos, targetPos, t);
-            t += Time.deltaTime * dodgeSpeed;
+            controller.Move(dir.normalized * dodgeSpeed * Time.deltaTime);
+            elapsed += Time.deltaTime;
             yield return null;
         }
-        yield return new WaitForSeconds(0.05f);
+
         isDodging = false;
     }
 
