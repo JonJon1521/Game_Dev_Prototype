@@ -306,17 +306,26 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     void HandleDodgeInput()
     {
         if (isDodging) return;
+
         Camera cam = Camera.main;
+
+        Vector3 camRight = cam.transform.right;
+        camRight.y = 0;
+        camRight.Normalize();
+
         if (Input.GetKeyDown(KeyCode.E))
         {
-            StartCoroutine(DodgeRoutine(transform.right));
-            if (cam != null && cam.GetComponent<cameraController>() != null)
+            StartCoroutine(DodgeRoutine(camRight));
+
+            if (cam.GetComponent<cameraController>() != null)
                 cam.GetComponent<cameraController>().DodgeTilt(-40f, 0.2f);
         }
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            StartCoroutine(DodgeRoutine(-transform.right));
-            if (cam != null && cam.GetComponent<cameraController>() != null)
+            StartCoroutine(DodgeRoutine(-camRight));
+
+            if (cam.GetComponent<cameraController>() != null)
                 cam.GetComponent<cameraController>().DodgeTilt(40f, 0.2f);
         }
     }
